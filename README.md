@@ -33,8 +33,8 @@ Ho un profilo ibrido, e lo considero il mio vantaggio:
 | Area | Cosa faccio, in concreto |
 |---|---|
 | **Advisory** | Strategia digitale, audit di account e piattaforme, affiancamento al team dalla domanda giusta al piano operativo |
-| **Digital Intelligence & Analytics** | Tracking plan, design del dataLayer, GA4 e Google Tag Manager, Consent Mode v2, pipeline ETL con Funnel.io, BigQuery e SQL, dashboard in Looker Studio |
-| **E-commerce** | Esperto di Shopify: temi in Liquid, tracciamento con i Customer Events, eventi ecommerce GA4 dal catalogo al checkout |
+| **Digital Intelligence & Analytics** | Tracking plan, design del dataLayer, GA4 e Google Tag Manager, server side tracking su Cloud Run e App Engine, Consent Mode v2 con le principali CMP (Iubenda, Cookiebot, Consent Manager, OneTrust), pipeline ETL con Funnel.io, BigQuery e SQL, dashboard in Looker Studio |
+| **Shopify** | Codice delle pagine in Liquid e tracciamenti con i Customer Events: eventi ecommerce GA4 affidabili dal catalogo al checkout. Non sviluppo temi e non gestisco store, intervengo dove servono dati |
 | **SEO** | SEO tecnica e on-page, architettura dei contenuti, dati strutturati, Core Web Vitals, visibilità nelle risposte delle AI |
 | **AI & Agentic AI** | Flussi agentici che collegano LLM a dati e strumenti: modelli OpenAI e Anthropic, anche via OpenRouter, workflow n8n, connettori MCP. Self-hosting su Proxmox e Hetzner |
 | **Online Advertising** | Campagne a performance su Google e Meta, gestione del budget, misurazione dei risultati |
@@ -60,6 +60,7 @@ Ogni dettaglio è una competenza messa alla prova:
 | `ProfilePage` + `Person` in JSON-LD, `llms.txt`, accesso esplicito ai crawler AI | AI search visibility |
 | Interfaccia da LLM con streaming, tool call, suggerimenti e feedback, scritta senza API esterne. Il selettore del modello nasconde la versione del portfolio, **11.26** | UX per prodotti AI |
 | Il menu **Aiuto** della barra macOS apre `robots.txt`, `llms.txt` e la sitemap dentro il browser, per chi non saprebbe dove cercarli | UX, divulgazione tecnica |
+| Installabile come **web app** su iOS e Android: manifest con icone maskable e scorciatoie, splash screen per iPhone e iPad, service worker per l'uso offline | PWA, sviluppo front-end |
 | Design system ricavato dalla mia brand identity: antracite `#252528`, oro `#DEC79B`, Montserrat | Design, brand identity |
 | Zero framework, zero dipendenze: HTML semantico, CSS moderno, ES modules. Font self-hosted, circa 600 KB in tutto, navigabile da tastiera, `prefers-reduced-motion` rispettato | Sviluppo front-end, accessibilità |
 
@@ -88,7 +89,7 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 
 | Evento custom | Evento GA4 | Parametri GA4 |
 |---|---|---|
-| — | `page_view` | `page_title`, `page_location`, `page_path`, `page_referrer`, `language`, `screen_resolution`, `content_group` |
+| — | `page_view` | `page_title`, `page_location`, `page_path`, `page_referrer`, `language`, `screen_resolution`, `content_group` (+ `display_mode`: browser o app installata) |
 | `chat_prompt` (domanda scritta) | `search` | `search_term` |
 | `chat_prompt` (suggerimento) | `select_content` | `content_type: chat_suggestion`, `content_id` |
 | `chat_response` (servizi, clienti, competenze) | `view_item_list` | `item_list_id`, `item_list_name`, `items[]` con `item_id`, `item_name`, `item_brand`, `item_category`, `item_category2`, `index` |
@@ -98,7 +99,7 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 | `contact_click` | `generate_lead` | `lead_source`, `currency`, `value` |
 | `share_click` | `share` | `method`, `content_type`, `item_id` |
 | `intro_start` / `intro_complete` | `tutorial_begin` / `tutorial_complete` | |
-| `profile_loaded`, `chat_feedback`, `chat_reset`, `consent_update`, `intro_skipped`, `menu_open`, `model_info_open`, `release_notes_open` | — | Custom: nessun equivalente GA4 |
+| `profile_loaded`, `chat_feedback`, `chat_reset`, `consent_update`, `intro_skipped`, `menu_open`, `model_info_open`, `release_notes_open`, `app_install_prompt`, `app_installed` | — | Custom: nessun equivalente GA4 |
 
 </details>
 
@@ -118,9 +119,10 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 
 | | |
 |---|---|
-| **Analytics** | Google Analytics 4 · Google Tag Manager · Consent Mode v2 · DataLayer design |
+| **Analytics** | Google Analytics 4 · Google Tag Manager · DataLayer design · Consent Mode v2 · Server Side Tracking (Cloud Run, App Engine) |
+| **CMP** | Iubenda · Cookiebot · Consent Manager · OneTrust |
 | **Data & BI** | BigQuery · SQL · Funnel.io (ETL) · Looker Studio |
-| **E-commerce** | Shopify · Liquid · Shopify Customer Events |
+| **Shopify** | Liquid (codice delle pagine) · Customer Events · Tracciamento e-commerce |
 | **SEO** | Google Search Console · Dati strutturati schema.org · Core Web Vitals · AI search visibility |
 | **AI** | OpenAI · Anthropic · OpenRouter · n8n · MCP · Agentic workflows · Prompt engineering |
 | **Infrastruttura & Tool** | Proxmox · Hetzner · Notion |
@@ -158,8 +160,8 @@ Sono aperto a nuovi progetti di consulenza e a collaborazioni con team marketing
 
 I'm **Giacomo Caprioli**, an Italian digital marketing consultant with 10+ years of experience. I help brands get more out of their digital investments.
 
-- **What I do:** marketing strategy, technical SEO, digital analytics (GA4, GTM, dataLayer design, Funnel.io, BigQuery/SQL, Looker Studio), Shopify (Liquid, Customer Events) and agentic AI workflows (OpenAI, Anthropic, OpenRouter, n8n, MCP, self-hosted on Proxmox/Hetzner).
-- **This repository:** my portfolio, built as a working demo. It's a fake macOS browser running an LLM trained on me, with browser extensions that inspect the page live: a real `window.dataLayer` mapped to GA4 recommended events, an SEO auditor with Core Web Vitals, Consent Mode v2 and structured data. Hint: check the model version in the dropdown and the Help menu.
+- **What I do:** marketing strategy, technical SEO, digital analytics (GA4, GTM, dataLayer design, server-side tracking on Cloud Run and App Engine, CMPs such as Iubenda, Cookiebot and OneTrust, Funnel.io, BigQuery/SQL, Looker Studio), Shopify tracking (Liquid page code, Customer Events) and agentic AI workflows (OpenAI, Anthropic, OpenRouter, n8n, MCP, self-hosted on Proxmox/Hetzner).
+- **This repository:** my portfolio, built as a working demo. It's a fake macOS browser running an LLM trained on me, with browser extensions that inspect the page live: a real `window.dataLayer` mapped to GA4 recommended events, an SEO auditor with Core Web Vitals, Consent Mode v2 and structured data. It's also an installable web app on iOS and Android. Hint: check the model version in the dropdown and the Help menu.
 - **How it's built:** zero dependencies, accessible, about 600 KB.
 
 Open to consulting projects and collaborations. Reach me at [giacomo.caprioli@gmail.com](mailto:giacomo.caprioli@gmail.com) or on [LinkedIn](https://www.linkedin.com/in/giacomo-caprioli/).

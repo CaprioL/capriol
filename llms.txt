@@ -10,10 +10,11 @@
 - Digital Marketing: online advertising e misurazione delle performance
 
 ## Competenze e strumenti
-- Digital analytics: Google Analytics 4, Google Tag Manager, dataLayer design, tracking plan, Consent Mode v2
+- Digital analytics: Google Analytics 4, Google Tag Manager, dataLayer design, tracking plan, Consent Mode v2, server side tracking (Cloud Run, App Engine)
+- CMP: Iubenda, Cookiebot, Consent Manager, OneTrust
 - Data & BI: BigQuery, SQL, Funnel.io (ETL), Looker Studio
 - Programmazione: Python, JavaScript, HTML e CSS
-- E-commerce: Shopify (esperto), Liquid, Shopify Customer Events
+- Shopify: codice delle pagine in Liquid e tracciamenti con i Customer Events (non sviluppo di temi né gestione dello store)
 - AI & Agentic AI: OpenAI, Anthropic, OpenRouter, n8n, MCP, agentic workflows, prompt engineering
 - Infrastruttura e tool: Proxmox, Hetzner, Notion
 - Design e comunicazione: brand identity, graphic design, UX/UI, copywriting

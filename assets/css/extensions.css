@@ -334,3 +334,7 @@
   .consent { position: fixed; top: auto; left: 12px; right: 12px; width: auto; bottom: max(12px, env(safe-area-inset-bottom)); }
   .ext-tools { flex-wrap: wrap; }
 }
+
+/* Voce dello stack con sotto-voci: occupa tutta la riga */
+.tech--group { grid-column: 1 / -1; flex-wrap: wrap; }
+.tech--group .chips--nested { margin-left: auto; }

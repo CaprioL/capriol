@@ -1,15 +1,48 @@
 {
+  "id": "./",
   "name": "capriol. | Giacomo Caprioli",
   "short_name": "capriol.",
-  "description": "Il portfolio interattivo di Giacomo Caprioli, consulente di digital marketing.",
+  "description": "Il portfolio interattivo di Giacomo Caprioli, consulente di digital marketing, SEO, data e AI.",
   "lang": "it",
+  "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#252528",
   "theme_color": "#252528",
+  "categories": ["business", "productivity"],
   "icons": [
-    { "src": "assets/favicon/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "assets/favicon/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "assets/favicon/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/favicon/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/pwa/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/img/pwa/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Chi è Giacomo",
+      "short_name": "Chi è",
+      "description": "Profilo ed esperienza",
+      "url": "./?ask=about",
+      "icons": [{ "src": "assets/img/pwa/shortcut-chat.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Servizi",
+      "short_name": "Servizi",
+      "description": "Le cinque aree di consulenza",
+      "url": "./?ask=services",
+      "icons": [{ "src": "assets/img/pwa/shortcut-grid.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Fai la tua mossa",
+      "short_name": "Contatti",
+      "description": "Email, telefono e LinkedIn",
+      "url": "./?ask=contact",
+      "icons": [{ "src": "assets/img/pwa/shortcut-knight.png", "sizes": "96x96", "type": "image/png" }]
+    }
+  ],
+  "screenshots": [
+    { "src": "assets/img/pwa/screenshot-wide.webp", "sizes": "1440x900", "type": "image/webp", "form_factor": "wide", "label": "La chat di capriol. in una finestra Safari" },
+    { "src": "assets/img/pwa/screenshot-narrow.webp", "sizes": "780x1688", "type": "image/webp", "form_factor": "narrow", "label": "Il profilo di Giacomo nella chat, su smartphone" }
   ]
 }

@@ -13,10 +13,11 @@ export const config = {
   /**
    * Easter egg: la "versione del modello" è la revisione del portfolio,
    * nel formato MM.AA (11.26 = novembre 2026). Aggiornala a ogni revisione.
+   * Nel menu compare solo "Versione 11.26": il significato resta un segreto
+   * per chi apre le note di rilascio.
    */
   release: {
     version: '11.26',
-    label: 'novembre 2026',
     notes: [
       'Nuove competenze: Shopify, n8n, OpenRouter, Funnel.io e altre.',
       'Il menu Aiuto ora apre robots.txt, llms.txt e la sitemap.',

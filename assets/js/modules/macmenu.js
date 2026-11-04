@@ -8,7 +8,7 @@ import { $, h } from './dom.js';
 import { analytics } from './analytics.js';
 import { DOCS } from './docview.js';
 
-export function initHelpMenu({ onOpenDoc, onReplayIntro, onConsent }) {
+export function initHelpMenu({ onOpenDoc, onReplayIntro, onConsent, onInstall }) {
   const button = $('#menu-help');
   if (!button) return;
 
@@ -26,6 +26,8 @@ export function initHelpMenu({ onOpenDoc, onReplayIntro, onConsent }) {
     h('hr', { class: 'mac-menu__sep', role: 'separator' }),
     item('Rivedi l’intro', null, onReplayIntro),
     item('Preferenze cookie', null, onConsent),
+    h('hr', { class: 'mac-menu__sep', role: 'separator' }),
+    item('Installa come app', 'Aggiungi capriol. alla schermata Home o al Dock', onInstall),
   );
   button.after(menu);
   button.setAttribute('aria-controls', 'menu-help-list');

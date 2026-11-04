@@ -17,7 +17,7 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
 | Nome | Giacomo Caprioli |
 | Brand | **capriol.** (con il punto), claim *Leaps beyond known* |
 | Ruolo | Consulente di Digital Marketing, oltre 10 anni di esperienza |
-| Competenze | Strategia, SEO, Digital Analytics (GA4, GTM, dataLayer, Consent Mode), Data & BI (BigQuery, SQL, Funnel.io, Looker Studio), Python e JavaScript, Shopify (esperto: Liquid, Customer Events), AI e Agentic AI (OpenAI, Anthropic, OpenRouter, n8n, MCP), infrastruttura (Proxmox, Hetzner), Notion, Advertising, Design e comunicazione |
+| Competenze | Strategia, SEO, Digital Analytics (GA4, GTM, dataLayer, Consent Mode, server side tracking su Cloud Run e App Engine), CMP (Iubenda, Cookiebot, Consent Manager, OneTrust), Data & BI (BigQuery, SQL, Funnel.io, Looker Studio), Python e JavaScript, Shopify (solo codice delle pagine in Liquid e tracciamenti con Customer Events), AI e Agentic AI (OpenAI, Anthropic, OpenRouter, n8n, MCP), infrastruttura (Proxmox, Hetzner), Notion, Advertising, Design e comunicazione |
 | Email | giacomo.caprioli@gmail.com |
 | Telefono | (+39) 347 0348852 (formato scelto da Giacomo; `href` = `tel:+393470348852`) |
 | LinkedIn | https://www.linkedin.com/in/giacomo-caprioli/ |
@@ -52,11 +52,13 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
 
 - **Fonti:** due deck di Giacomo ("[ProjectName] Project Proposal" in PPTX e "Fondazione Architetti Mantova – Project Proposal" in SVG). Loghi, foto, icone di servizi e valori sono stati estratti da lì.
 
-**Competenze confermate da Giacomo** (novembre 2026): n8n, Proxmox, Hetzner, OpenRouter, OpenAI, Anthropic, Funnel.io (ETL), Looker Studio, BigQuery, SQL, Python, JavaScript, Shopify (esperto: Liquid e Customer Events), Notion.
+**Competenze confermate da Giacomo** (novembre 2026): n8n, Proxmox, Hetzner, OpenRouter, OpenAI, Anthropic, Funnel.io (ETL), Looker Studio, BigQuery, SQL, Python, JavaScript, Shopify, Notion, CMP (Iubenda, Cookiebot, Consent Manager, OneTrust), Server Side Tracking (Cloud Run, App Engine).
+
+> ⚠️ **Perimetro Shopify, da rispettare in ogni testo:** Giacomo si occupa **solo** del codice delle pagine in Liquid e dei tracciamenti (Liquid e Customer Events). **Non** sviluppa temi e **non** gestisce e-commerce o store. Non scrivere mai il contrario, in nessun testo: chat, README, llms.txt, JSON-LD.
 
 **Contenuti da far verificare a Giacomo** (scritti o dedotti dall'AI, non confermati):
 - Le frasi brevi sotto ogni valore e ogni servizio.
-- I punti elenco degli intenti `shopify` e `ai`.
+- I punti elenco degli intenti `shopify` e `ai`. Per Shopify il perimetro è stato corretto da Giacomo: vedi l'avviso sopra.
 - Parte dello stack: GA4, GTM, Consent Mode, Google/Meta Ads.
 
 ## 3. Identità visiva
@@ -82,8 +84,11 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
   - Niente maiuscolo per le etichette, salvo il logotipo "LEAPS BEYOND KNOWN", che fa parte del marchio.
   - Ironia leggera da LLM: "capriol. potrebbe essere un po’ di parte…".
 - **Nome del modello:** solo **"capriol."**. Il suffisso "10+" è stato rimosso su richiesta: non reintrodurlo.
-- **Versione del modello (easter egg):** nel menu a tendina del selettore c'è il chip **11.26**, con le "Novità della 11.26". È la revisione del portfolio in formato MM.AA. **A ogni revisione** aggiorna `config.release` (`version`, `label`, `notes`), la cronologia del §14 e il README, che cita 11.26.
-- **Etichette in sidebar:** "Competenze e Stack" e "AI e Agenti" hanno la seconda parola maiuscola per scelta di Giacomo. È un'eccezione voluta al sentence case.
+- **Versione del modello (easter egg):** nel menu a tendina del selettore c'è il chip **11.26**, con la riga "Versione 11.26" e le "Novità della 11.26". È la revisione del portfolio in formato MM.AA.
+  - Mostra **solo** "Versione 11.26", senza mese né data: Giacomo l'ha chiesto esplicitamente. Il significato resta un segreto, spiegato solo nelle note di rilascio.
+  - Le note di rilascio **non** vanno aggiornate a ogni batch di modifiche: le decide Giacomo. Le modifiche della v4 (§14) sono state escluse su sua richiesta.
+  - A una nuova revisione (nuovo MM.AA) aggiorna `config.release` (`version`, `notes`), la cronologia del §14 e il README, che cita 11.26.
+- **Etichette in sidebar:** ogni parola principale va maiuscola: "Competenze e Stack", "AI e Agenti", "Dati e Analytics". Gli articoli e le congiunzioni restano minuscoli. È una scelta di Giacomo ed è un'eccezione voluta al sentence case. I prompt mostrati in chat ("Come usa l’AI e gli agenti?") restano frasi normali.
 
 ## 4. Hosting e URL
 
@@ -95,6 +100,7 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
   - Canonical, `og:url`, `og:image`, JSON-LD, `sitemap.xml`, `robots.txt` e `llms.txt` contengono `https://capriol.github.io/capriol/`.
   - ⚠️ `robots.txt` e `llms.txt` vengono letti dai crawler **solo alla radice del dominio**. Su un sottopercorso non vengono letti, e Giacomo ne è consapevole: per renderli efficaci servono un **dominio personalizzato** (file `CNAME` + DNS) oppure un repository `CaprioL.github.io`. Intanto la sitemap va inviata da Google Search Console.
   - Per il visitatore medio i tre file sono consultabili **dentro il browser finto**: menu **Aiuto** della barra macOS su desktop, voci in fondo alla sidebar su mobile (vedi §7).
+- **Web app installabile** (dettagli al §7 bis): `site.webmanifest`, `sw.js` e i meta Apple in `index.html`. Il service worker vive in `/capriol/sw.js`, quindi il suo scope è `/capriol/`. Con un dominio personalizzato funziona senza modifiche, perché tutti i percorsi sono relativi.
 - **Se si passa a un dominio personalizzato,** sostituisci `https://capriol.github.io/capriol/` ovunque e riporta i percorsi di `404.html` a `/assets/…`. In `404.html` va tolto anche il `.replace(/^\/capriol/, '')` nello script.
 
 ## 5. Struttura dei file
@@ -104,7 +110,9 @@ index.html            Unica pagina. Contiene: GTM + Consent Mode (in testa), met
                       JSON-LD, markup statico della cornice e del benvenuto, <noscript>.
 404.html              Errore in stile Safari (percorsi /capriol/…).
 robots.txt            ASCII art "capriol" in testa + regole (crawler AI consentiti).
-sitemap.xml, llms.txt, site.webmanifest, .nojekyll, .editorconfig, .gitignore, LICENSE
+sitemap.xml, llms.txt, .nojekyll, .editorconfig, .gitignore, LICENSE
+site.webmanifest      Manifest PWA: icone any + maskable, scorciatoie (?ask=), screenshot
+sw.js                 Service worker "network first" (offline + installabilità)
 README.md             Profilo GitHub / recruiting (NON istruzioni tecniche).
 docs/                 Screenshot del README (home, datalayer, seo, clients, robots) + questo handover.
 
@@ -131,6 +139,7 @@ assets/js/
     chrome.js         Orologio, zoom, sidebar, share, model menu e versione, barra indirizzi
     docview.js        Vista dei file di testo (robots.txt, llms.txt, sitemap.xml) nel browser
     macmenu.js        Menu "Aiuto" della barra macOS (pattern ARIA menu button)
+    pwa.js            Registrazione del service worker, installazione, display mode
     cursor-demo.js    Intro animata col cursore
     metrics.js        LCP/CLS/FCP/TTFB via PerformanceObserver
     icons.js          Set di icone SVG inline
@@ -144,9 +153,11 @@ assets/js/
       manager.js      Menu "Estensioni" (icona puzzle)
       json-tree.js    Albero JSON con <details>
 
-assets/img/brand/     monogram.png, logo-capriol.png, giacomo-caprioli.(webp|jpg)
+assets/img/brand/     monogram.png, logo-capriol.png, giacomo-caprioli.(webp|jpg) (foto 400×400, aggiornata nella v4)
 assets/img/clients/   Loghi in WebP, altezza ~120 px, grigio chiaro su trasparente
 assets/img/icons/     Icone di servizi e valori dal deck (PNG bianche, 128 px)
+assets/img/pwa/       maskable-192/512, shortcut-*.png (96 px), screenshot-wide/narrow.webp,
+                      splash/ (12 splash screen iOS: iPhone e iPad, verticale)
 assets/img/og-image.png  1200×630
 assets/favicon/       ico, 32, 180 (apple), 192, 512
 assets/fonts/         woff2 subset + README licenze
@@ -168,7 +179,8 @@ assets/fonts/         woff2 subset + README licenze
   - **Nessun match:** se compaiono "giacomo", "caprioli" o "lui" risponde `about`, altrimenti con il `fallback`.
   - **Blocchi:** `text` (supporta `**grassetto**`), `profile`, `services`, `process`, `skills`, `values`, `quote`, `clients` (`size: sm|lg`, `caption`), `list`, `contact`, `action` (apre un'estensione).
   - **Nuovo intento:** compare in automatico nella sidebar. Se deve generare un `view_item_list`, aggiungilo a `intentLists` in `analytics.js`.
-- **Configurazione:** `assets/js/config.js` contiene `displayUrl`, `modelName`, `release` (versione, mese, note di rilascio), `ga4.currency`, `ga4.leadValue`, `demo.*` e `streamDelay`.
+- **Competenze con sotto-voci:** in `profile.skills` una voce può essere una stringa oppure `{ name, items }`. Per esempio `{ name: 'Server Side Tracking', items: ['Cloud Run', 'App Engine'] }` diventa una chip contenitore con chip figlie, nella chat e nell'estensione Tech Stack. Per conteggi, item GA4 e liste piatte usa sempre `skillNames(items)` da `profile.js`.
+- **Configurazione:** `assets/js/config.js` contiene `displayUrl`, `modelName`, `release` (versione e note di rilascio), `ga4.currency`, `ga4.leadValue`, `demo.*` e `streamDelay`.
 - **File del menu Aiuto:** elenco in `DOCS` dentro `modules/docview.js` (percorso, titolo, descrizione). Aggiungi lì un nuovo file di testo. Su mobile aggiungi anche il pulsante `data-open-doc` nella sidebar di `index.html`.
 
 ## 7. Comportamenti dell'interfaccia
@@ -199,6 +211,7 @@ assets/fonts/         woff2 subset + README licenze
   - Un file aperto sostituisce la chat nel viewport (`.doc-view`) e l'URL diventa `capriol.ai/<file>`. Il contenuto è caricato con `fetch` relativo. Ci sono le azioni "Apri il file originale", "Copia" e "Torna alla chat".
   - `Esc` chiude un livello alla volta (menu → popover → file), coordinato con `preventDefault`.
   - Su mobile la barra dei menu non c'è: robots.txt e llms.txt compaiono in fondo alla sidebar (`.sidebar__docs`, visibile solo ≤ 720 px).
+- **Link diretti a un argomento:** `?ask=<id intento>` (per esempio `./?ask=services`) apre la chat già su quell'argomento e salta l'intro. Lo usano le scorciatoie dell'app installata, e si può usare nei link condivisi. Il `prompt_source` è `shortcut`.
 - **Easter egg:**
   - La versione del modello è nel selettore in cima alla chat (§3).
   - In console compare un messaggio firmato capriol. con la versione e l'email.
@@ -206,6 +219,24 @@ assets/fonts/         woff2 subset + README licenze
 - **Responsive:**
   - ≤ 900 px: la sidebar diventa off-canvas.
   - ≤ 720 px: niente barra dei menu, finestra a tutto schermo, semafori e navigazione nascosti.
+
+## 7 bis. Web app installabile (PWA)
+
+- **Android / Chrome / Edge:**
+  - `site.webmanifest` con `id`, `start_url` e `scope` relativi (`./`), `display: standalone` e colori `#252528`.
+  - Icone `any` (192, 512, in `assets/favicon/`) e `maskable` (192, 512, glifo dentro la zona sicura all'80 %).
+  - Tre **scorciatoie** (pressione prolungata sull'icona): Chi è Giacomo, Servizi, Fai la tua mossa, che puntano a `?ask=`.
+  - Due **screenshot** (`wide` e `narrow`) per la finestra di installazione arricchita.
+- **iOS / iPadOS:** `apple-touch-icon` (180 px), meta `apple-mobile-web-app-capable`, `-title` ("capriol.") e `-status-bar-style` (`black-translucent`), più 12 `apple-touch-startup-image` con media query per dispositivo (iPhone da SE a 16 Pro Max, iPad Air e Pro 12,9″, verticale).
+- **Service worker (`sw.js`):**
+  - Strategia **network first** su tutte le richieste GET dello stesso dominio: online è sempre aggiornato, offline usa l'ultima copia. Nessun rischio di contenuti vecchi dopo un deploy.
+  - Precache minimo per il primo avvio offline. Le richieste di terze parti (GTM) non passano dalla cache.
+  - Il nome della cache è `capriol-v1`. Cambialo solo se modifichi la logica del service worker: i contenuti si aggiornano da soli.
+- **Installazione guidata:** voce "Installa come app" nel menu Aiuto (desktop) e "Installa l’app" in fondo alla sidebar (mobile).
+  - Dove esiste usa il prompt nativo (`beforeinstallprompt`, salvato senza `preventDefault`, così il browser può mostrare anche il suo invito).
+  - Su iOS mostra le istruzioni: Condividi → Aggiungi alla schermata Home.
+- **In modalità app:** `html[data-display-mode="standalone"]` e il parametro `display_mode` su `page_view`. Su iPad la safe area superiore è gestita con una media query `display-mode: standalone`. La cornice da browser resta anche nell'app installata: fa parte del concept.
+- **Verifica:** in Chrome DevTools → Application → Manifest, oppure via CDP `Page.getInstallabilityErrors`, che deve restituire una lista vuota (verificato nella v4). Le splash e le icone sono state generate con Playwright da HTML con Montserrat. Per rigenerarle, ricrea uno script simile: non è nel repository.
 
 ## 8. Analytics
 
@@ -222,7 +253,7 @@ Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfac
 
 | Custom | GA4 | Parametri GA4 | Note |
 |---|---|---|---|
-| — | `page_view` | `page_title`, `page_location`, `page_path`, `page_referrer`*, `language`, `screen_resolution`, `content_group: Portfolio` | *solo se presente |
+| — | `page_view` | `page_title`, `page_location`, `page_path`, `page_referrer`*, `language`, `screen_resolution`, `content_group: Portfolio`, `display_mode` (browser, standalone) | *solo se presente; `display_mode` è custom |
 | `profile_loaded` | — | — | Profilo completo, solo custom |
 | `chat_prompt` | `search` | `search_term` | Domanda scritta (`prompt_source: typed`) |
 | `chat_prompt` | `select_content` | `content_type: chat_suggestion`, `content_id: <intent>` | Sidebar, suggerimenti, follow-up, rigenera, estensione, intro |
@@ -237,6 +268,7 @@ Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfac
 | `intro_start` / `intro_complete` | `tutorial_begin` / `tutorial_complete` | — | |
 | `intro_skipped`, `window_zoom`, `consent_update`, `menu_open` (`menu_name`) | — | — | Solo custom |
 | `model_info_open`, `release_notes_open` | — | — | Solo custom, con `model_version` |
+| `app_install_prompt` (`outcome`: accepted, dismissed, ios_instructions, browser_instructions), `app_installed` | — | — | Solo custom |
 
 **Item:** campi `item_id`, `item_name`, `item_brand: capriol.`, `item_category` (Servizio / Cliente / Competenza), `item_category2` (area o gruppo), `item_list_id`, `item_list_name`, `index`.
 
@@ -315,6 +347,14 @@ Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfac
 | 28 | "E molti altri" in coda a ogni elenco clienti, griglia grande con riga dedicata a tutta larghezza | Alone di mistero voluto; la riga a tutta larghezza evita celle vuote con qualsiasi numero di loghi |
 | 29 | Nuovo intento `shopify` | Shopify è un'area di competenza esplicita di Giacomo, merita una risposta dedicata |
 | 30 | Competenze riorganizzate in 9 gruppi (Data & BI, Programmazione, E-commerce, Infrastruttura & Tool…) | Ospitare i nuovi strumenti senza gruppi sovraffollati |
+| 31 | Gruppo "E-commerce" rinominato "Shopify" e testi riscritti: solo codice delle pagine e tracciamenti | Correzione di Giacomo: non sviluppa temi né gestisce store |
+| 32 | Nuovo gruppo CMP; Server Side Tracking come voce con sotto-voci (Cloud Run, App Engine) | Richiesta di Giacomo; struttura `{ name, items }` generica e riusabile |
+| 33 | Nel menu del modello solo "Versione 11.26" | Richiesta di Giacomo |
+| 34 | Le modifiche della v4 non entrano nelle note di rilascio | Richiesta di Giacomo: le note di rilascio le decide lui |
+| 35 | Etichette della sidebar con le parole principali maiuscole ("Dati e Analytics") | Richiesta di Giacomo |
+| 36 | PWA completa (manifest, maskable, scorciatoie, screenshot, splash iOS, service worker network first) | Richiesta di Giacomo: salvataggio come web app su iOS e Android, senza rischio di cache vecchie |
+| 37 | Parametro `?ask=` per aprire un argomento | Serve alle scorciatoie dell'app e permette link condivisibili; il canonical evita contenuti duplicati |
+| 38 | Installazione con prompt nativo se disponibile, istruzioni su iOS | iOS non espone un'API di installazione |
 
 ## 12. Come testare in locale
 
@@ -336,7 +376,10 @@ Checklist dopo ogni modifica:
 - [ ] Il thread scorre dentro la finestra: il composer non deve mai uscire dallo schermo. È già successo: la griglia `.app` richiede `grid-template-rows: minmax(0, 1fr)` e `min-height: 0` su `.chat`.
 - [ ] Menu Aiuto: si apre con clic e con ↓ da tastiera. Ogni file si apre con l'URL aggiornato; "Indietro" e `Esc` tornano alla chat.
 - [ ] Mobile: in fondo alla sidebar ci sono robots.txt e llms.txt, e il testo va a capo senza scroll orizzontale.
-- [ ] Selettore del modello: chip 11.26 e note di rilascio presenti.
+- [ ] Selettore del modello: chip 11.26, riga "Versione 11.26" (senza data), note di rilascio invariate.
+- [ ] PWA: `Page.getInstallabilityErrors` vuoto, service worker attivo, cache `capriol-v1` popolata. `?ask=services` apre i servizi senza intro.
+- [ ] Sidebar: etichette con le parole principali maiuscole.
+- [ ] Testi Shopify coerenti col perimetro (solo Liquid e tracciamenti).
 
 Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigenerali se l'interfaccia cambia in modo visibile.
 
@@ -370,4 +413,12 @@ Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigeneral
   - Etichette "Competenze e Stack" e "AI e Agenti".
   - Nuove competenze (n8n, Proxmox, Hetzner, OpenRouter, OpenAI, Anthropic, Funnel.io, Looker Studio, Python, Shopify, Liquid, Customer Events, Notion) distribuite tra stack, intenti `ai`, `analytics`, `stack`, il nuovo intento `shopify`, `llms.txt` e JSON-LD.
   - "E molti altri" sui clienti; nuovi eventi `file_view`, `menu_open`, `release_notes_open`.
+  - README e handover aggiornati.
+- **v4** (stessa versione del portfolio 11.26; **non** riportata nelle note di rilascio, su richiesta di Giacomo):
+  - Nuova foto profilo.
+  - Nel menu del modello solo "Versione 11.26".
+  - Perimetro Shopify corretto: solo codice delle pagine in Liquid e tracciamenti.
+  - Competenze: gruppo CMP (Iubenda, Cookiebot, Consent Manager, OneTrust); Server Side Tracking con Cloud Run e App Engine in Digital Analytics.
+  - Etichette della sidebar con le parole principali maiuscole.
+  - Web app installabile su iOS e Android: manifest, icone, scorciatoie, splash, service worker, voce "Installa come app", eventi `app_install_prompt` e `app_installed`, `display_mode`.
   - README e handover aggiornati.

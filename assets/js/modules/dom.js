@@ -54,7 +54,7 @@ export const plain = (text) => text.replace(/\*\*/g, '');
 
 /** Toast di conferma, una riga, auto-chiudente. */
 let toastTimer;
-export function toast(message) {
+export function toast(message, duration = 2200) {
   let el = $('#toast');
   if (!el) {
     el = h('div', { id: 'toast', class: 'toast', role: 'status' });
@@ -63,7 +63,7 @@ export function toast(message) {
   el.textContent = message;
   el.classList.add('is-visible');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2200);
+  toastTimer = setTimeout(() => el.classList.remove('is-visible'), duration);
 }
 
 export async function copyText(text) {

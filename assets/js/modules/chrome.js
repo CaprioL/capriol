@@ -31,7 +31,7 @@ export function setAddress(path = '') {
   el.textContent = path ? `${el.dataset.host}/${path}` : el.dataset.home;
 }
 
-export function initChrome({ displayUrl, modelName, release, onBack, onNewChat, onReplayIntro, onConsent, onOpenDoc }) {
+export function initChrome({ displayUrl, modelName, release, onBack, onNewChat, onReplayIntro, onConsent, onOpenDoc, onInstall }) {
   startClock();
   loadingBar();
 
@@ -43,7 +43,6 @@ export function initChrome({ displayUrl, modelName, release, onBack, onNewChat, 
 
   // Easter egg: versione del "modello" = revisione del portfolio (MM.AA).
   document.querySelectorAll('[data-model-version]').forEach((el) => { el.textContent = release.version; });
-  document.querySelectorAll('[data-model-release]').forEach((el) => { el.textContent = release.label; });
   const notes = $('#model-notes-list');
   if (notes) notes.replaceChildren(...release.notes.map((n) => Object.assign(document.createElement('li'), { textContent: n })));
   $('#model-notes')?.addEventListener('toggle', (e) => {
@@ -80,6 +79,7 @@ export function initChrome({ displayUrl, modelName, release, onBack, onNewChat, 
   $('#btn-reload')?.addEventListener('click', () => location.reload());
   $('#btn-replay')?.addEventListener('click', () => { closeOnMobile(); onReplayIntro(); });
   $('#btn-consent')?.addEventListener('click', () => { closeOnMobile(); onConsent(); });
+  $('#btn-install')?.addEventListener('click', () => { closeOnMobile(); onInstall(); });
   document.querySelectorAll('[data-open-doc]').forEach((btn) =>
     btn.addEventListener('click', () => { closeOnMobile(); onOpenDoc(btn.dataset.openDoc, btn); }));
 

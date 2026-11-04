@@ -12,7 +12,7 @@
  */
 import { push } from './datalayer.js';
 import { config } from '../config.js';
-import { profile } from '../data/profile.js';
+import { profile, skillNames } from '../data/profile.js';
 
 const DOCS = 'https://developers.google.com/analytics/devguides/collection/ga4/reference/events';
 
@@ -84,7 +84,7 @@ const lists = {
     return {
       item_list_id: 'skills',
       item_list_name: 'Competenze',
-      items: profile.skills.flatMap((g) => g.items.map((name) => ({
+      items: profile.skills.flatMap((g) => skillNames(g.items).map((name) => ({
         item_id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         item_name: name,
         item_brand: BRAND,
@@ -104,7 +104,7 @@ const intentLists = { services: 'services', about: 'clients', clients: 'clients'
 /* ---------- Eventi del sito ---------- */
 
 export const analytics = {
-  pageView() {
+  pageView({ displayMode } = {}) {
     push({
       event: 'page_view',
       page_title: document.title,
@@ -114,6 +114,7 @@ export const analytics = {
       language: document.documentElement.lang,
       screen_resolution: `${screen.width}x${screen.height}`,
       content_group: 'Portfolio',
+      display_mode: displayMode,
     });
   },
 
@@ -205,6 +206,15 @@ export const analytics = {
       event: 'select_content',
       params: { content_type: 'file', content_id: name },
     });
+  },
+
+  /** outcome: accepted | dismissed | ios_instructions | browser_instructions */
+  installPrompt(outcome) {
+    track('app_install_prompt', { outcome });
+  },
+
+  appInstalled() {
+    track('app_installed');
   },
 
   menuOpen(menu) {

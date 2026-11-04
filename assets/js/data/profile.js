@@ -74,14 +74,19 @@ export const profile = {
     { name: 'Approcci su misura', icon: `${IMG}/icons/values/su-misura.png`, text: 'Nessun pacchetto standard: si parte dal tuo contesto.' },
   ],
 
-  /** Competenze e strumenti. Alimentano la chat e l'estensione "Tech Stack". */
+  /**
+   * Competenze e strumenti. Alimentano la chat e l'estensione "Tech Stack".
+   * Una voce può essere una stringa o un oggetto { name, items } quando ha
+   * sotto-voci (es. Server Side Tracking → Cloud Run, App Engine).
+   */
   skills: [
     { group: 'Design & Comunicazione', items: ['Brand identity', 'Graphic design', 'UX / UI', 'Copywriting', 'Content strategy'] },
     { group: 'SEO', items: ['SEO tecnica', 'SEO on-page', 'Google Search Console', 'Dati strutturati', 'AI search visibility'] },
-    { group: 'Digital Analytics', items: ['Google Analytics 4', 'Google Tag Manager', 'DataLayer design', 'Tracking plan', 'Consent Mode'] },
+    { group: 'Digital Analytics', items: ['Google Analytics 4', 'Google Tag Manager', 'DataLayer design', 'Tracking plan', 'Consent Mode', { name: 'Server Side Tracking', items: ['Cloud Run', 'App Engine'] }] },
+    { group: 'CMP', items: ['Iubenda', 'Cookiebot', 'Consent Manager', 'OneTrust'] },
     { group: 'Data & BI', items: ['BigQuery', 'SQL', 'Funnel.io (ETL)', 'Looker Studio'] },
     { group: 'Programmazione', items: ['Python', 'JavaScript', 'HTML & CSS'] },
-    { group: 'E-commerce', items: ['Shopify', 'Liquid', 'Shopify Customer Events'] },
+    { group: 'Shopify', items: ['Liquid', 'Customer Events', 'Tracciamento e-commerce'] },
     { group: 'AI & Agentic AI', items: ['OpenAI', 'Anthropic', 'OpenRouter', 'n8n', 'MCP', 'Agentic workflows', 'Prompt engineering'] },
     { group: 'Infrastruttura & Tool', items: ['Proxmox', 'Hetzner', 'Notion'] },
     { group: 'Advertising', items: ['Google Ads', 'Meta Ads', 'Performance measurement'] },
@@ -113,3 +118,8 @@ export const profile = {
     cta: 'E ora fai la tua mossa ;)',
   },
 };
+
+/** Elenco piatto dei nomi di un gruppo di competenze (sotto-voci comprese). */
+export function skillNames(items) {
+  return items.flatMap((item) => (typeof item === 'string' ? [item] : [item.name, ...item.items]));
+}

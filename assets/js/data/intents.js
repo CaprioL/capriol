@@ -5,6 +5,8 @@
  * blocchi che compongono la risposta. I blocchi sono renderizzati da
  * modules/blocks.js; i testi supportano **grassetto**.
  */
+import { skillNames } from './profile.js';
+
 export const intents = [
   {
     id: 'about',
@@ -39,11 +41,11 @@ export const intents = [
     label: 'Competenze e Stack',
     prompt: 'Che competenze e strumenti usa?',
     keywords: ['competenze', 'competenza', 'skill', 'stack', 'strumenti', 'tool', 'tecnologie', 'sa fare', 'programma', 'programmazione', 'codice', 'python', 'javascript', 'design', 'grafica', 'proxmox', 'hetzner', 'notion', 'server', 'infrastruttura'],
-    tool: { name: 'stack.scan', args: { target: 'giacomo' }, pick: (p) => Object.fromEntries(p.skills.map((s) => [s.group, s.items.length])) },
+    tool: { name: 'stack.scan', args: { target: 'giacomo' }, pick: (p) => Object.fromEntries(p.skills.map((s) => [s.group, skillNames(s.items).length])) },
     blocks: [
       { type: 'text', text: 'Un profilo ibrido: **designer** quanto basta, **analista** per vocazione, **sviluppatore** quando serve.' },
       { type: 'skills' },
-      { type: 'text', text: 'Dati in **BigQuery** e **SQL**, pipeline ETL con **Funnel.io**, dashboard in **Looker Studio**. Codice in **Python** e **JavaScript**, e-commerce su **Shopify**. Server propri su **Proxmox** e **Hetzner**, e tutto documentato in **Notion**.' },
+      { type: 'text', text: 'Tracciamento anche **server side** su Cloud Run e App Engine, consenso gestito con le principali **CMP** (Iubenda, Cookiebot, Consent Manager, OneTrust). Dati in **BigQuery** e **SQL**, pipeline ETL con **Funnel.io**, dashboard in **Looker Studio**. Codice in **Python** e **JavaScript**, tracciamenti su **Shopify**. Server propri su **Proxmox** e **Hetzner**, e tutto documentato in **Notion**.' },
       { type: 'action', label: 'Apri l’estensione Tech Stack', extension: 'stack' },
     ],
     followups: ['ai', 'analytics', 'contact'],
@@ -53,7 +55,7 @@ export const intents = [
     label: 'AI e Agenti',
     prompt: 'Come usa l’AI e gli agenti?',
     keywords: ['ai', 'intelligenza artificiale', 'agent', 'agenti', 'agentic', 'llm', 'gpt', 'claude', 'openai', 'anthropic', 'openrouter', 'n8n', 'automazione', 'automazioni', 'workflow', 'mcp', 'prompt'],
-    tool: { name: 'agents.describe', args: { scope: 'marketing' }, pick: (p) => p.skills.find((s) => s.group.startsWith('AI')).items },
+    tool: { name: 'agents.describe', args: { scope: 'marketing' }, pick: (p) => skillNames(p.skills.find((s) => s.group.startsWith('AI')).items) },
     blocks: [
       { type: 'text', text: 'Per Giacomo l’AI è uno strumento di lavoro, non uno slogan. Progetta **flussi agentici** che collegano i modelli linguistici ai dati reali: analytics, BigQuery, documenti.' },
       { type: 'list', items: [
@@ -88,15 +90,17 @@ export const intents = [
   },
   {
     id: 'analytics',
-    label: 'Dati e analytics',
+    label: 'Dati e Analytics',
     prompt: 'Come lavora con i dati?',
-    keywords: ['dati', 'data', 'analytics', 'analisi', 'ga4', 'tag manager', 'gtm', 'datalayer', 'tracciamento', 'tracking', 'bigquery', 'sql', 'dashboard', 'looker', 'funnel', 'etl', 'misurazione', 'report', 'kpi'],
+    keywords: ['dati', 'data', 'analytics', 'analisi', 'ga4', 'tag manager', 'gtm', 'datalayer', 'tracciamento', 'tracking', 'server side', 'sgtm', 'cloud run', 'app engine', 'cmp', 'cookie', 'consenso', 'iubenda', 'cookiebot', 'onetrust', 'consent', 'bigquery', 'sql', 'dashboard', 'looker', 'funnel', 'etl', 'misurazione', 'report', 'kpi'],
     tool: { name: 'services.get', args: { id: 'analytics' }, pick: (p) => p.services.find((s) => s.id === 'analytics') },
     blocks: [
       { type: 'text', text: 'Senza misurazione non c’è ottimizzazione. Giacomo progetta il **tracking plan**, struttura il **dataLayer**, configura GA4 e Tag Manager e porta i dati in **BigQuery** per analisi e dashboard.' },
       { type: 'list', items: [
         'Tracking plan e specifiche del dataLayer',
         'GA4, Google Tag Manager e Consent Mode',
+        'Server Side Tracking su Cloud Run e App Engine',
+        'CMP: Iubenda, Cookiebot, Consent Manager, OneTrust',
         'Shopify Customer Events per il tracciamento e-commerce',
         'Pipeline ETL con Funnel.io e analisi in BigQuery e SQL',
         'Dashboard in Looker Studio leggibili dal business',
@@ -110,14 +114,14 @@ export const intents = [
     label: 'Shopify',
     prompt: 'Lavora con Shopify?',
     keywords: ['shopify', 'ecommerce', 'e commerce', 'liquid', 'negozio', 'shop', 'store', 'customer events', 'pixel', 'checkout'],
-    tool: { name: 'stack.get', args: { group: 'E-commerce' }, pick: (p) => p.skills.find((s) => s.group === 'E-commerce').items },
+    tool: { name: 'stack.get', args: { group: 'Shopify' }, pick: (p) => skillNames(p.skills.find((s) => s.group === 'Shopify').items) },
     blocks: [
-      { type: 'text', text: 'Sì, ed è uno dei suoi terreni preferiti. Giacomo è esperto di **Shopify**: lavora sui temi in **Liquid** e sul tracciamento con i **Customer Events**.' },
+      { type: 'text', text: 'Sì, su un fronte preciso: il **codice delle pagine** in **Liquid** e i **tracciamenti** con i **Customer Events**. Non sviluppa temi e non gestisce lo store: interviene dove servono dati affidabili.' },
       { type: 'list', items: [
-        'Temi e sezioni personalizzate in Liquid',
-        'Customer Events e pixel custom per un tracciamento e-commerce affidabile',
+        'Interventi sul codice delle pagine in Liquid',
+        'Tracciamento con i Customer Events e pixel custom',
         'Eventi ecommerce GA4 coerenti dal catalogo al checkout',
-        'Analisi di funnel e conversioni, fino a BigQuery e Looker Studio',
+        'Dati pronti per l’analisi, fino a BigQuery e Looker Studio',
       ] },
     ],
     followups: ['analytics', 'services', 'contact'],

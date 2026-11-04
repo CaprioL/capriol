@@ -1,13 +1,16 @@
 /** Estensione "Tech Stack": competenze di Giacomo + tecnologie di questa pagina. */
 import { h } from '../dom.js';
-import { profile } from '../../data/profile.js';
+import { profile, skillNames } from '../../data/profile.js';
 
 const initials = (name) => name.replace(/[^A-Za-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 
-function item(name) {
-  return h('li', { class: 'tech' },
+function item(entry) {
+  const name = typeof entry === 'string' ? entry : entry.name;
+  return h('li', { class: `tech${typeof entry === 'string' ? '' : ' tech--group'}` },
     h('span', { class: 'tech__badge', 'aria-hidden': 'true' }, initials(name)),
-    h('span', { class: 'tech__name' }, name));
+    h('span', { class: 'tech__name' }, name),
+    typeof entry === 'string' ? null : h('ul', { class: 'chips chips--nested', 'aria-label': name },
+      entry.items.map((sub) => h('li', { class: 'chip chip--sub' }, sub))));
 }
 
 export default {
@@ -17,16 +20,16 @@ export default {
   icon: 'layers',
 
   render({ body, setSubtitle, api }) {
-    const total = profile.skills.reduce((n, g) => n + g.items.length, 0);
+    const total = profile.skills.reduce((n, g) => n + skillNames(g.items).length, 0);
     setSubtitle(`${total} tecnologie rilevate su Giacomo`);
 
     const groups = profile.skills.map((g) =>
       h('section', { class: 'ext-section' },
-        h('h3', { class: 'ext-section__title' }, g.group, h('span', { class: 'count' }, String(g.items.length))),
+        h('h3', { class: 'ext-section__title' }, g.group, h('span', { class: 'count' }, String(skillNames(g.items).length))),
         h('ul', { class: 'tech-list' }, g.items.map(item)),
       ));
 
-    const page = ['HTML semantico', 'CSS custom properties', 'JavaScript (ES modules)', 'Schema.org JSON-LD', 'window.dataLayer', 'GA4 recommended events', 'Consent Mode v2', 'GitHub Pages'];
+    const page = ['HTML semantico', 'CSS custom properties', 'JavaScript (ES modules)', 'Schema.org JSON-LD', 'window.dataLayer', 'GA4 recommended events', 'Consent Mode v2', 'PWA installabile', 'Service worker', 'GitHub Pages'];
     if (document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) page.splice(5, 0, 'Google Tag Manager');
     const thisPage = h('section', { class: 'ext-section ext-section--muted' },
       h('h3', { class: 'ext-section__title' }, 'Questa pagina usa'),

@@ -13,17 +13,20 @@ import { startMetrics } from './modules/metrics.js';
 import { initChrome, loadingBar, setAddress } from './modules/chrome.js';
 import { initDocViewer, openDoc, closeDoc, isDocOpen } from './modules/docview.js';
 import { initHelpMenu } from './modules/macmenu.js';
+import { initPwa, installApp, displayMode } from './modules/pwa.js';
 import * as chat from './modules/chat.js';
 import * as extensions from './modules/extensions/index.js';
 import { createDemo } from './modules/cursor-demo.js';
 
 startMetrics();
+initPwa();
 document.documentElement.classList.add('js');
+document.documentElement.dataset.displayMode = displayMode();
 
 /* GTM e Consent Mode v2 sono inizializzati in index.html, prima di questo modulo. */
 
 /* ---------- Eventi iniziali ---------- */
-analytics.pageView();
+analytics.pageView({ displayMode: displayMode() });
 
 analytics.profileLoaded({
   person: {
@@ -59,6 +62,7 @@ const ui = initChrome({
   onReplayIntro: replayIntro,
   onConsent: openConsent,
   onOpenDoc: showDoc,
+  onInstall: installApp,
 });
 
 initDocViewer({
@@ -66,7 +70,7 @@ initDocViewer({
   onClose: () => { setAddress(); loadingBar(); },
 });
 
-initHelpMenu({ onOpenDoc: showDoc, onReplayIntro: replayIntro, onConsent: openConsent });
+initHelpMenu({ onOpenDoc: showDoc, onReplayIntro: replayIntro, onConsent: openConsent, onInstall: installApp });
 
 extensions.initExtensions({
   onAsk: (id) => chat.ask(byId[id].prompt, { source: 'extension', intentId: id }),
@@ -102,7 +106,13 @@ const SEEN_KEY = 'capriol:intro-seen';
 let seen = false;
 try { seen = sessionStorage.getItem(SEEN_KEY) === '1'; } catch { /* storage non disponibile */ }
 
+// Link diretto a un argomento (scorciatoie dell'app installata, link condivisi): ?ask=services
+const askParam = new URLSearchParams(location.search).get('ask');
+const deepLink = askParam && byId[askParam] ? byId[askParam] : null;
+if (deepLink) chat.ask(deepLink.prompt, { source: 'shortcut', intentId: deepLink.id });
+
 const shouldRunDemo = config.demo.enabled
+  && !deepLink
   && !reducedMotion()
   && !isTouch()
   && !(config.demo.oncePerSession && seen);

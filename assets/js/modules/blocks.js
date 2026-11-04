@@ -50,7 +50,13 @@ const renderers = {
     return h('div', { class: 'skill-groups' }, profile.skills.map((g) =>
       h('section', { class: 'skill-group' },
         h('h3', { class: 'skill-group__title' }, g.group),
-        h('ul', { class: 'chips' }, g.items.map((item) => h('li', { class: 'chip' }, item))),
+        h('ul', { class: 'chips' }, g.items.map((item) => (typeof item === 'string'
+          ? h('li', { class: 'chip' }, item)
+          // Voce con sotto-voci: chip "contenitore" con le chip figlie dentro
+          : h('li', { class: 'chip chip--group' },
+            h('span', {}, item.name),
+            h('ul', { class: 'chips chips--nested', 'aria-label': item.name },
+              item.items.map((sub) => h('li', { class: 'chip chip--sub' }, sub))))))),
       ),
     ));
   },

@@ -161,3 +161,14 @@ strong { font-weight: 600; color: var(--text); }
     scroll-behavior: auto !important;
   }
 }
+
+/* Chip con sotto-voci (es. Server Side Tracking → Cloud Run, App Engine) */
+.chip--group { gap: 8px; padding: 3px 4px 3px 11px; border-color: var(--gold-line); color: var(--text); }
+.chips--nested { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.chip--sub {
+  padding: 1px 8px;
+  border: 0;
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: 11px;
+}

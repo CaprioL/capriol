@@ -281,3 +281,9 @@
   .doc-view__bar { padding: 10px 14px; }
   .doc-view__text { padding: 16px 14px 32px; font-size: 11px; }
 }
+
+/* App installata (standalone): su iPad la barra di stato iOS è sovrapposta al contenuto */
+@media (display-mode: standalone) and (min-width: 721px) {
+  .desktop { padding-top: env(safe-area-inset-top, 0px); }
+  .browser { height: calc(100dvh - var(--menubar-h) - 48px - env(safe-area-inset-top, 0px)); }
+}
