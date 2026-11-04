@@ -9,11 +9,18 @@
 - MarTech & Data: tracking plan, dataLayer, GA4, Google Tag Manager, BigQuery, SQL, dashboard
 - Digital Marketing: online advertising e misurazione delle performance
 
-## Competenze trasversali
-Design e grafica, UX/UI, programmazione web (HTML, CSS, JavaScript), SQL, AI e agentic AI (LLM, MCP, automazioni).
+## Competenze e strumenti
+- Digital analytics: Google Analytics 4, Google Tag Manager, dataLayer design, tracking plan, Consent Mode v2
+- Data & BI: BigQuery, SQL, Funnel.io (ETL), Looker Studio
+- Programmazione: Python, JavaScript, HTML e CSS
+- E-commerce: Shopify (esperto), Liquid, Shopify Customer Events
+- AI & Agentic AI: OpenAI, Anthropic, OpenRouter, n8n, MCP, agentic workflows, prompt engineering
+- Infrastruttura e tool: Proxmox, Hetzner, Notion
+- Design e comunicazione: brand identity, graphic design, UX/UI, copywriting
+- Advertising: Google Ads, Meta Ads
 
 ## Clienti
-TEDxVerona, Croce Rossa Italiana, Fondazione Architetti Mantova, The Vice, Rampi, MIDJ, Radio Iusve, Portobello Vintage & Riuso, NimbleBit, LifeBites.
+TEDxVerona, Croce Rossa Italiana, Fondazione Architetti Mantova, The Vice, Rampi, MIDJ, Radio Iusve, Portobello Vintage & Riuso, NimbleBit, LifeBites e molti altri.
 
 ## Metodo
 1. Conosciamoci

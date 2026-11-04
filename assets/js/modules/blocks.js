@@ -70,14 +70,21 @@ const renderers = {
   },
 
   clients({ profile }, block) {
-    return h('figure', { class: `clients clients--${block.size || 'sm'}` },
+    const large = block.size === 'lg';
+    // L'ultima voce lascia intendere che la lista non è completa.
+    const more = large
+      ? h('li', { class: 'clients__more' },
+        h('span', { class: 'clients__more-title' }, profile.clientsNote),
+        h('span', { class: 'clients__more-text' }, profile.clientsTeaser))
+      : h('li', { class: 'clients__more' }, profile.clientsNote.toLowerCase());
+    return h('figure', { class: `clients clients--${large ? 'lg' : 'sm'}` },
       block.caption ? h('figcaption', { class: 'clients__caption' }, block.caption) : null,
       h('ul', { class: 'clients__list' }, profile.clients.map((c) => {
         const logo = h('img', { src: c.logo, alt: c.name, title: c.name, loading: 'lazy', decoding: 'async' });
         return h('li', {}, c.url
           ? h('a', { href: c.url, target: '_blank', rel: 'noopener', onclick: () => analytics.clientClick(c) }, logo)
           : logo);
-      })),
+      }), more),
     );
   },
 

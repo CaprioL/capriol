@@ -226,3 +226,58 @@
   .address { padding-right: 10px; }
   .ext-btn { width: 29px; }
 }
+
+/* ---------- Vista file di testo (robots.txt, llms.txt, sitemap.xml) ---------- */
+
+.doc-view {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: var(--ink);
+}
+.doc-view[hidden] { display: none; }
+.doc-view.is-open { animation: doc-in 0.25s var(--ease); }
+@keyframes doc-in { from { opacity: 0; } }
+
+.doc-view__bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-2);
+}
+.doc-view__icon {
+  display: grid; place-items: center;
+  flex: none;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--on-gold);
+}
+.doc-view__meta { flex: 1 1 220px; min-width: 0; }
+.doc-view__title { font-family: var(--font-mono); font-size: var(--fs-base); font-weight: 600; }
+.doc-view__title:focus { outline: none; }
+.doc-view__desc { font-size: var(--fs-xs); color: var(--text-2); }
+.doc-view__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.doc-view__text {
+  margin: 0;
+  padding: 24px 28px 40px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #e3e1db;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+@media (max-width: 720px) {
+  .doc-view__bar { padding: 10px 14px; }
+  .doc-view__text { padding: 16px 14px 32px; font-size: 11px; }
+}

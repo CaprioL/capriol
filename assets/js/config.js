@@ -11,6 +11,20 @@ export const config = {
   modelName: 'capriol.',
 
   /**
+   * Easter egg: la "versione del modello" è la revisione del portfolio,
+   * nel formato MM.AA (11.26 = novembre 2026). Aggiornala a ogni revisione.
+   */
+  release: {
+    version: '11.26',
+    label: 'novembre 2026',
+    notes: [
+      'Nuove competenze: Shopify, n8n, OpenRouter, Funnel.io e altre.',
+      'Il menu Aiuto ora apre robots.txt, llms.txt e la sitemap.',
+      'Clienti: qualche nome in più, qualcuno ancora da rivelare.',
+    ],
+  },
+
+  /**
    * Google Tag Manager è installato direttamente in index.html (GTM-T5VM84TV),
    * così parte prima di qualsiasi modulo. Qui restano solo i parametri GA4.
    */

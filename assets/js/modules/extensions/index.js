@@ -101,7 +101,10 @@ export function initExtensions({ onAsk }) {
   $('.ext-popover__close', popover).addEventListener('click', () => close({ restoreFocus: true }));
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && current) close({ restoreFocus: true });
+    if (e.key === 'Escape' && current) {
+      e.preventDefault();
+      close({ restoreFocus: true });
+    }
   });
   document.addEventListener('pointerdown', (e) => {
     if (!current || !e.isTrusted) return;

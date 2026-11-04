@@ -33,9 +33,10 @@ Ho un profilo ibrido, e lo considero il mio vantaggio:
 | Area | Cosa faccio, in concreto |
 |---|---|
 | **Advisory** | Strategia digitale, audit di account e piattaforme, affiancamento al team dalla domanda giusta al piano operativo |
-| **Digital Intelligence & Analytics** | Tracking plan, design del dataLayer, GA4 e Google Tag Manager, Consent Mode v2, BigQuery e SQL, dashboard per il business |
+| **Digital Intelligence & Analytics** | Tracking plan, design del dataLayer, GA4 e Google Tag Manager, Consent Mode v2, pipeline ETL con Funnel.io, BigQuery e SQL, dashboard in Looker Studio |
+| **E-commerce** | Esperto di Shopify: temi in Liquid, tracciamento con i Customer Events, eventi ecommerce GA4 dal catalogo al checkout |
 | **SEO** | SEO tecnica e on-page, architettura dei contenuti, dati strutturati, Core Web Vitals, visibilità nelle risposte delle AI |
-| **AI & Agentic AI** | Flussi agentici che collegano LLM a dati e strumenti (MCP), automazioni per report, analisi e contenuti |
+| **AI & Agentic AI** | Flussi agentici che collegano LLM a dati e strumenti: modelli OpenAI e Anthropic, anche via OpenRouter, workflow n8n, connettori MCP. Self-hosting su Proxmox e Hetzner |
 | **Online Advertising** | Campagne a performance su Google e Meta, gestione del budget, misurazione dei risultati |
 | **Comunicazione & Design** | Brand identity, graphic design, UX/UI, copywriting e content strategy coerenti su ogni touchpoint |
 
@@ -57,7 +58,8 @@ Ogni dettaglio è una competenza messa alla prova:
 | **Consent Mode v2** con richiesta di permesso in stile Safari, consensi `denied` di default e scelta persistente | Privacy by design, conformità GDPR |
 | **SEO Inspector**: legge meta, canonical, JSON-LD e misura LCP, CLS, FCP e TTFB con `PerformanceObserver` | SEO tecnica, performance |
 | `ProfilePage` + `Person` in JSON-LD, `llms.txt`, accesso esplicito ai crawler AI | AI search visibility |
-| Interfaccia da LLM con streaming, tool call, suggerimenti e feedback, scritta senza API esterne | UX per prodotti AI |
+| Interfaccia da LLM con streaming, tool call, suggerimenti e feedback, scritta senza API esterne. Il selettore del modello nasconde la versione del portfolio, **11.26** | UX per prodotti AI |
+| Il menu **Aiuto** della barra macOS apre `robots.txt`, `llms.txt` e la sitemap dentro il browser, per chi non saprebbe dove cercarli | UX, divulgazione tecnica |
 | Design system ricavato dalla mia brand identity: antracite `#252528`, oro `#DEC79B`, Montserrat | Design, brand identity |
 | Zero framework, zero dipendenze: HTML semantico, CSS moderno, ES modules. Font self-hosted, circa 600 KB in tutto, navigabile da tastiera, `prefers-reduced-motion` rispettato | Sviluppo front-end, accessibilità |
 
@@ -69,6 +71,12 @@ Ogni dettaglio è una competenza messa alla prova:
   <tr>
     <td align="center"><sub>Il mio profilo, in formato dati</sub></td>
     <td align="center"><sub>La pagina che si analizza da sola</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/preview-robots.webp" alt="Il file robots.txt aperto nel browser dal menu Aiuto, con l’ASCII art capriol"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><sub>robots.txt aperto dal menu Aiuto. Sì, c’è un’ASCII art.</sub></td>
   </tr>
 </table>
 
@@ -85,11 +93,12 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 | `chat_prompt` (suggerimento) | `select_content` | `content_type: chat_suggestion`, `content_id` |
 | `chat_response` (servizi, clienti, competenze) | `view_item_list` | `item_list_id`, `item_list_name`, `items[]` con `item_id`, `item_name`, `item_brand`, `item_category`, `item_category2`, `index` |
 | `extension_open` | `select_content` | `content_type: browser_extension`, `content_id` |
+| `file_view` | `select_content` | `content_type: file`, `content_id` (+ `file_name`, `file_extension`) |
 | `client_click` | `select_content` | `content_type: client`, `content_id` (+ `link_url`, `link_domain`, `outbound`) |
 | `contact_click` | `generate_lead` | `lead_source`, `currency`, `value` |
 | `share_click` | `share` | `method`, `content_type`, `item_id` |
 | `intro_start` / `intro_complete` | `tutorial_begin` / `tutorial_complete` | |
-| `profile_loaded`, `chat_feedback`, `chat_reset`, `consent_update`, `intro_skipped` | — | Custom: nessun equivalente GA4 |
+| `profile_loaded`, `chat_feedback`, `chat_reset`, `consent_update`, `intro_skipped`, `menu_open`, `model_info_open`, `release_notes_open` | — | Custom: nessun equivalente GA4 |
 
 </details>
 
@@ -110,11 +119,13 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 | | |
 |---|---|
 | **Analytics** | Google Analytics 4 · Google Tag Manager · Consent Mode v2 · DataLayer design |
-| **Data** | BigQuery · SQL · Dashboarding |
+| **Data & BI** | BigQuery · SQL · Funnel.io (ETL) · Looker Studio |
+| **E-commerce** | Shopify · Liquid · Shopify Customer Events |
 | **SEO** | Google Search Console · Dati strutturati schema.org · Core Web Vitals · AI search visibility |
-| **AI** | LLM · Prompt engineering · Agentic workflows · MCP · Automazioni |
+| **AI** | OpenAI · Anthropic · OpenRouter · n8n · MCP · Agentic workflows · Prompt engineering |
+| **Infrastruttura & Tool** | Proxmox · Hetzner · Notion |
+| **Sviluppo** | Python · JavaScript · HTML · CSS |
 | **Advertising** | Google Ads · Meta Ads |
-| **Sviluppo** | HTML · CSS · JavaScript |
 | **Design** | Brand identity · Graphic design · UX / UI |
 
 <br>
@@ -122,6 +133,8 @@ Ogni evento custom porta il parametro `ga4_event`, che rimanda al suo gemello GA
 ## Hanno lavorato con me
 
 TEDxVerona · Croce Rossa Italiana · [Fondazione Architetti Mantova](https://fondazionearchitettimantova.it) · [The Vice](https://the-vice.it) · Rampi · MIDJ · Radio Iusve · Portobello Vintage & Riuso · NimbleBit · LifeBites
+
+**…e molti altri.** Alcuni nomi preferiscono restare dietro le quinte: per conoscerli serve una call.
 
 <p align="center">
   <img src="docs/preview-clients.webp" alt="I loghi dei clienti nella chat di capriol." width="100%">
@@ -145,8 +158,8 @@ Sono aperto a nuovi progetti di consulenza e a collaborazioni con team marketing
 
 I'm **Giacomo Caprioli**, an Italian digital marketing consultant with 10+ years of experience. I help brands get more out of their digital investments.
 
-- **What I do:** marketing strategy, technical SEO, digital analytics (GA4, GTM, dataLayer design, BigQuery/SQL) and agentic AI workflows.
-- **This repository:** my portfolio, built as a working demo. It's a fake macOS browser running an LLM trained on me, with browser extensions that inspect the page live: a real `window.dataLayer` mapped to GA4 recommended events, an SEO auditor with Core Web Vitals, Consent Mode v2 and structured data.
+- **What I do:** marketing strategy, technical SEO, digital analytics (GA4, GTM, dataLayer design, Funnel.io, BigQuery/SQL, Looker Studio), Shopify (Liquid, Customer Events) and agentic AI workflows (OpenAI, Anthropic, OpenRouter, n8n, MCP, self-hosted on Proxmox/Hetzner).
+- **This repository:** my portfolio, built as a working demo. It's a fake macOS browser running an LLM trained on me, with browser extensions that inspect the page live: a real `window.dataLayer` mapped to GA4 recommended events, an SEO auditor with Core Web Vitals, Consent Mode v2 and structured data. Hint: check the model version in the dropdown and the Help menu.
 - **How it's built:** zero dependencies, accessible, about 600 KB.
 
 Open to consulting projects and collaborations. Reach me at [giacomo.caprioli@gmail.com](mailto:giacomo.caprioli@gmail.com) or on [LinkedIn](https://www.linkedin.com/in/giacomo-caprioli/).

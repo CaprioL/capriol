@@ -190,8 +190,25 @@ export const analytics = {
     track('window_zoom', { zoomed });
   },
 
-  modelInfoOpen() {
-    track('model_info_open');
+  modelInfoOpen(version) {
+    track('model_info_open', { model_version: version });
+  },
+
+  releaseNotesOpen(version) {
+    track('release_notes_open', { model_version: version });
+  },
+
+  /** Nessun evento GA4 per "leggere un file": select_content con content_type file è il più vicino. */
+  fileView(path, source) {
+    const name = path.split('/').pop();
+    track('file_view', { file_name: name, file_extension: name.split('.').pop(), open_source: source }, {
+      event: 'select_content',
+      params: { content_type: 'file', content_id: name },
+    });
+  },
+
+  menuOpen(menu) {
+    track('menu_open', { menu_name: menu });
   },
 
   consent(analyticsStorage) {

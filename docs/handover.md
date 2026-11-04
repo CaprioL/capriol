@@ -2,7 +2,7 @@
 
 > **Per chi riprende il lavoro (persona o AI):** leggi questo file per intero prima di modificare qualsiasi cosa. Contiene il concept, l'architettura, le convenzioni e le decisioni già prese, con le loro motivazioni. Se una richiesta nuova contraddice una decisione qui registrata, segnalalo prima di procedere. A fine lavoro aggiorna questo file: sezioni toccate, [registro delle decisioni](#11-registro-delle-decisioni) e [cronologia](#14-cronologia).
 
-Ultimo aggiornamento: novembre 2026.
+Ultimo aggiornamento: novembre 2026, versione del portfolio **11.26**.
 
 ---
 
@@ -17,13 +17,14 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
 | Nome | Giacomo Caprioli |
 | Brand | **capriol.** (con il punto), claim *Leaps beyond known* |
 | Ruolo | Consulente di Digital Marketing, oltre 10 anni di esperienza |
-| Competenze | Strategia, SEO, Digital Analytics (GA4, GTM, dataLayer, BigQuery, SQL), AI e Agentic AI (LLM, MCP), Advertising, Design e comunicazione, programmazione web |
+| Competenze | Strategia, SEO, Digital Analytics (GA4, GTM, dataLayer, Consent Mode), Data & BI (BigQuery, SQL, Funnel.io, Looker Studio), Python e JavaScript, Shopify (esperto: Liquid, Customer Events), AI e Agentic AI (OpenAI, Anthropic, OpenRouter, n8n, MCP), infrastruttura (Proxmox, Hetzner), Notion, Advertising, Design e comunicazione |
 | Email | giacomo.caprioli@gmail.com |
 | Telefono | (+39) 347 0348852 (formato scelto da Giacomo; `href` = `tel:+393470348852`) |
 | LinkedIn | https://www.linkedin.com/in/giacomo-caprioli/ |
 | GitHub | utente `CaprioL`, repository `capriol` |
 | Motto | "Nessuna sfida è troppo grande da non poter essere affrontata." |
 | Chiusura | "E ora fai la tua mossa ;)" |
+| Versione del portfolio | **11.26** (formato MM.AA = novembre 2026), in `config.release` |
 
 - **Servizi** (dal deck "Proposta progetto"):
   - Advisory → Consulting
@@ -47,13 +48,16 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
   | Portobello Vintage & Riuso | |
   | NimbleBit | |
   | LifeBites | |
+  | *…e molti altri* | Voluto: alone di mistero (`clientsNote`, `clientsTeaser`) |
 
 - **Fonti:** due deck di Giacomo ("[ProjectName] Project Proposal" in PPTX e "Fondazione Architetti Mantova – Project Proposal" in SVG). Loghi, foto, icone di servizi e valori sono stati estratti da lì.
 
+**Competenze confermate da Giacomo** (novembre 2026): n8n, Proxmox, Hetzner, OpenRouter, OpenAI, Anthropic, Funnel.io (ETL), Looker Studio, BigQuery, SQL, Python, JavaScript, Shopify (esperto: Liquid e Customer Events), Notion.
+
 **Contenuti da far verificare a Giacomo** (scritti o dedotti dall'AI, non confermati):
 - Le frasi brevi sotto ogni valore e ogni servizio.
-- Parte dello stack in `profile.js`, dedotta dai suoi strumenti: GA4, GTM, BigQuery, Consent Mode, Dashboarding, Google/Meta Ads.
-- Python **non** è dichiarato di proposito: non è mai stato confermato.
+- I punti elenco degli intenti `shopify` e `ai`.
+- Parte dello stack: GA4, GTM, Consent Mode, Google/Meta Ads.
 
 ## 3. Identità visiva
 
@@ -78,6 +82,8 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
   - Niente maiuscolo per le etichette, salvo il logotipo "LEAPS BEYOND KNOWN", che fa parte del marchio.
   - Ironia leggera da LLM: "capriol. potrebbe essere un po’ di parte…".
 - **Nome del modello:** solo **"capriol."**. Il suffisso "10+" è stato rimosso su richiesta: non reintrodurlo.
+- **Versione del modello (easter egg):** nel menu a tendina del selettore c'è il chip **11.26**, con le "Novità della 11.26". È la revisione del portfolio in formato MM.AA. **A ogni revisione** aggiorna `config.release` (`version`, `label`, `notes`), la cronologia del §14 e il README, che cita 11.26.
+- **Etichette in sidebar:** "Competenze e Stack" e "AI e Agenti" hanno la seconda parola maiuscola per scelta di Giacomo. È un'eccezione voluta al sentence case.
 
 ## 4. Hosting e URL
 
@@ -87,7 +93,8 @@ Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** ch
   - `index.html` usa solo percorsi relativi, quindi funziona ovunque.
   - `404.html` usa percorsi assoluti `/capriol/…`, perché viene servito su URL arbitrari.
   - Canonical, `og:url`, `og:image`, JSON-LD, `sitemap.xml`, `robots.txt` e `llms.txt` contengono `https://capriol.github.io/capriol/`.
-  - ⚠️ `robots.txt` e `llms.txt` vengono letti dai crawler **solo alla radice del dominio**. Su un sottopercorso sono "decorativi": il `robots.txt` con l'ASCII art resta un easter egg per chi lo apre. Per renderli efficaci servono un **dominio personalizzato** (file `CNAME` + DNS) oppure un repository `CaprioL.github.io`. Intanto la sitemap va inviata da Google Search Console.
+  - ⚠️ `robots.txt` e `llms.txt` vengono letti dai crawler **solo alla radice del dominio**. Su un sottopercorso non vengono letti, e Giacomo ne è consapevole: per renderli efficaci servono un **dominio personalizzato** (file `CNAME` + DNS) oppure un repository `CaprioL.github.io`. Intanto la sitemap va inviata da Google Search Console.
+  - Per il visitatore medio i tre file sono consultabili **dentro il browser finto**: menu **Aiuto** della barra macOS su desktop, voci in fondo alla sidebar su mobile (vedi §7).
 - **Se si passa a un dominio personalizzato,** sostituisci `https://capriol.github.io/capriol/` ovunque e riporta i percorsi di `404.html` a `/assets/…`. In `404.html` va tolto anche il `.replace(/^\/capriol/, '')` nello script.
 
 ## 5. Struttura dei file
@@ -99,7 +106,7 @@ index.html            Unica pagina. Contiene: GTM + Consent Mode (in testa), met
 robots.txt            ASCII art "capriol" in testa + regole (crawler AI consentiti).
 sitemap.xml, llms.txt, site.webmanifest, .nojekyll, .editorconfig, .gitignore, LICENSE
 README.md             Profilo GitHub / recruiting (NON istruzioni tecniche).
-docs/                 Screenshot del README + questo handover.
+docs/                 Screenshot del README (home, datalayer, seo, clients, robots) + questo handover.
 
 assets/css/           Caricati in quest'ordine da index.html:
   tokens.css          Variabili e @font-face
@@ -121,7 +128,9 @@ assets/js/
     consent.js        Richiesta di consenso stile Safari + gtag('consent','update')
     chat.js           Matching intenti, streaming, tool call, azioni messaggio
     blocks.js         Renderer dei blocchi ricchi + card contatti
-    chrome.js         Orologio, zoom finestra, sidebar, share, model menu, pulsanti
+    chrome.js         Orologio, zoom, sidebar, share, model menu e versione, barra indirizzi
+    docview.js        Vista dei file di testo (robots.txt, llms.txt, sitemap.xml) nel browser
+    macmenu.js        Menu "Aiuto" della barra macOS (pattern ARIA menu button)
     cursor-demo.js    Intro animata col cursore
     metrics.js        LCP/CLS/FCP/TTFB via PerformanceObserver
     icons.js          Set di icone SVG inline
@@ -151,6 +160,7 @@ assets/fonts/         woff2 subset + README licenze
 
 - **Testi, clienti, servizi, valori, competenze, contatti:** `assets/js/data/profile.js`.
   - **Nuovo cliente:** aggiungi il logo WebP in `assets/img/clients/` e una riga `{ name, logo, url? }`. Con `url` il logo diventa un link esterno tracciato (`client_click` → `select_content`).
+  - **Mistero sui clienti:** `clientsNote` ("E molti altri.") chiude ogni elenco, sia nella striscia piccola sia nella griglia grande. `clientsTeaser` è la riga sotto, nella griglia. L'intento `clients` aggiunge una frase che invita alla call. Mantieni questo tono anche quando aggiungi clienti.
   - **Telefono ed email** compaiono anche in `index.html`: nel JSON-LD (`telephone`, `email`) e nel `<noscript>`. Vanno in `llms.txt` e nel README. Aggiorna tutti i punti.
 - **Domande e risposte della chat:** `assets/js/data/intents.js`.
   - **Matching:** testo normalizzato (minuscolo, senza accenti). Il punteggio è la somma delle lunghezze delle keyword trovate. Keyword di 3 caratteri o meno = parola intera; più lunghe = prefisso di parola.
@@ -158,7 +168,8 @@ assets/fonts/         woff2 subset + README licenze
   - **Nessun match:** se compaiono "giacomo", "caprioli" o "lui" risponde `about`, altrimenti con il `fallback`.
   - **Blocchi:** `text` (supporta `**grassetto**`), `profile`, `services`, `process`, `skills`, `values`, `quote`, `clients` (`size: sm|lg`, `caption`), `list`, `contact`, `action` (apre un'estensione).
   - **Nuovo intento:** compare in automatico nella sidebar. Se deve generare un `view_item_list`, aggiungilo a `intentLists` in `analytics.js`.
-- **Configurazione:** `assets/js/config.js` contiene `displayUrl`, `modelName`, `ga4.currency`, `ga4.leadValue`, `demo.*` e `streamDelay`.
+- **Configurazione:** `assets/js/config.js` contiene `displayUrl`, `modelName`, `release` (versione, mese, note di rilascio), `ga4.currency`, `ga4.leadValue`, `demo.*` e `streamDelay`.
+- **File del menu Aiuto:** elenco in `DOCS` dentro `modules/docview.js` (percorso, titolo, descrizione). Aggiungi lì un nuovo file di testo. Su mobile aggiungi anche il pulsante `data-open-doc` nella sidebar di `index.html`.
 
 ## 7. Comportamenti dell'interfaccia
 
@@ -180,7 +191,18 @@ assets/fonts/         woff2 subset + README licenze
   - Azioni sotto ogni risposta: copia, 👍/👎 (evento `chat_feedback`), rigenera.
 - **Finestra:**
   - Il semaforo verde ingrandisce la finestra; rosso e giallo sono decorativi e non interattivi.
-  - "Indietro" = nuova chat.
+  - "Indietro": se è aperto un file torna alla chat, altrimenti apre una nuova chat.
+- **Menu Aiuto e vista file:**
+  - Nella barra dei menu macOS solo **Aiuto** è interattivo; le altre voci sono decorative (`aria-hidden`).
+  - Contenuto del menu: robots.txt, llms.txt, sitemap.xml, poi "Rivedi l’intro" e "Preferenze cookie".
+  - Tastiera: frecce, Home/End, Esc e Tab.
+  - Un file aperto sostituisce la chat nel viewport (`.doc-view`) e l'URL diventa `capriol.ai/<file>`. Il contenuto è caricato con `fetch` relativo. Ci sono le azioni "Apri il file originale", "Copia" e "Torna alla chat".
+  - `Esc` chiude un livello alla volta (menu → popover → file), coordinato con `preventDefault`.
+  - Su mobile la barra dei menu non c'è: robots.txt e llms.txt compaiono in fondo alla sidebar (`.sidebar__docs`, visibile solo ≤ 720 px).
+- **Easter egg:**
+  - La versione del modello è nel selettore in cima alla chat (§3).
+  - In console compare un messaggio firmato capriol. con la versione e l'email.
+  - Il robots.txt ha l'ASCII art.
 - **Responsive:**
   - ≤ 900 px: la sidebar diventa off-canvas.
   - ≤ 720 px: niente barra dei menu, finestra a tutto schermo, semafori e navigazione nascosti.
@@ -211,8 +233,10 @@ Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfac
 | `client_click` | `select_content` | `content_type: client`, `content_id` | Custom con `link_url`, `link_domain`, `outbound` |
 | `contact_click` | `generate_lead` | `lead_source`, `currency`, `value` | `lead_source`: email, email_cta, phone, linkedin, copy_email |
 | `share_click` | `share` | `method`, `content_type: page`, `item_id` | |
+| `file_view` | `select_content` | `content_type: file`, `content_id: <file>` | Custom con `file_name`, `file_extension`, `open_source` |
 | `intro_start` / `intro_complete` | `tutorial_begin` / `tutorial_complete` | — | |
-| `intro_skipped`, `window_zoom`, `model_info_open`, `consent_update` | — | — | Solo custom |
+| `intro_skipped`, `window_zoom`, `consent_update`, `menu_open` (`menu_name`) | — | — | Solo custom |
+| `model_info_open`, `release_notes_open` | — | — | Solo custom, con `model_version` |
 
 **Item:** campi `item_id`, `item_name`, `item_brand: capriol.`, `item_category` (Servizio / Cliente / Competenza), `item_category2` (area o gruppo), `item_list_id`, `item_list_name`, `index`.
 
@@ -283,6 +307,14 @@ Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfac
 | 20 | `robots.txt` con ASCII art "capriol" (font figlet *big*) | Richiesta di Giacomo; easter egg per chi lavora nel settore |
 | 21 | Il logo cliente diventa un link solo se c'è `url` | Si linkano solo i siti forniti da Giacomo (FAM, The Vice) |
 | 22 | Griglia servizi 3+2 con container query | Evita la cella vuota con 5 elementi |
+| 23 | robots.txt, llms.txt e sitemap consultabili dal menu **Aiuto** della barra macOS, aperti dentro il browser finto | Richiesta di Giacomo: renderli leggibili anche al visitatore medio, sfruttando la metafora del browser |
+| 24 | Solo "Aiuto" è interattivo nella barra dei menu | Le altre voci senza funzione sarebbero controlli finti; Aiuto è il posto dove un utente Mac cerca informazioni |
+| 25 | Su mobile, robots.txt e llms.txt in fondo alla sidebar | La barra dei menu è nascosta sotto i 720 px |
+| 26 | Lettura di un file = `file_view` + `select_content` (`content_type: file`) | GA4 non ha un evento per "leggere un file"; `file_download` non è corretto perché non si scarica nulla |
+| 27 | Versione del modello = revisione del portfolio (MM.AA), con note di rilascio | Easter egg chiesto da Giacomo, coerente con il linguaggio dei modelli AI |
+| 28 | "E molti altri" in coda a ogni elenco clienti, griglia grande con riga dedicata a tutta larghezza | Alone di mistero voluto; la riga a tutta larghezza evita celle vuote con qualsiasi numero di loghi |
+| 29 | Nuovo intento `shopify` | Shopify è un'area di competenza esplicita di Giacomo, merita una risposta dedicata |
+| 30 | Competenze riorganizzate in 9 gruppi (Data & BI, Programmazione, E-commerce, Infrastruttura & Tool…) | Ospitare i nuovi strumenti senza gruppi sovraffollati |
 
 ## 12. Come testare in locale
 
@@ -302,6 +334,9 @@ Checklist dopo ogni modifica:
 - [ ] Mobile a 390 px: sidebar off-canvas, estensioni e consenso come bottom sheet, composer visibile.
 - [ ] Con `prefers-reduced-motion` niente intro e risposte istantanee.
 - [ ] Il thread scorre dentro la finestra: il composer non deve mai uscire dallo schermo. È già successo: la griglia `.app` richiede `grid-template-rows: minmax(0, 1fr)` e `min-height: 0` su `.chat`.
+- [ ] Menu Aiuto: si apre con clic e con ↓ da tastiera. Ogni file si apre con l'URL aggiornato; "Indietro" e `Esc` tornano alla chat.
+- [ ] Mobile: in fondo alla sidebar ci sono robots.txt e llms.txt, e il testo va a capo senza scroll orizzontale.
+- [ ] Selettore del modello: chip 11.26 e note di rilascio presenti.
 
 Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigenerali se l'interfaccia cambia in modo visibile.
 
@@ -317,6 +352,8 @@ Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigeneral
   - Pagina privacy.
   - Dominio personalizzato.
   - Un intento "Disponibilità" con le tipologie di collaborazione.
+  - Altre voci della barra macOS rese funzionanti (per esempio "capriol. → Informazioni su capriol." con la versione).
+  - Case study Shopify con eventi ecommerce GA4 completi (`view_item`, `add_to_cart`, `purchase`) come demo nell'Inspector.
 
 ## 14. Cronologia
 
@@ -327,3 +364,10 @@ Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigeneral
   - Nome modello "capriol." senza "10+"; telefono reale.
   - Nuovi clienti: FAM, The Vice (con link), Portobello Vintage & Riuso. Radio Iusve nominato.
   - URL su `/capriol/`; ASCII art in `robots.txt`; README riscritto per il recruiting; questo handover.
+- **v3 (versione del portfolio 11.26):**
+  - Menu **Aiuto** nella barra macOS per aprire robots.txt, llms.txt e sitemap.xml dentro il browser; voci equivalenti su mobile.
+  - Easter egg: versione del modello 11.26 con note di rilascio nel selettore; messaggio in console.
+  - Etichette "Competenze e Stack" e "AI e Agenti".
+  - Nuove competenze (n8n, Proxmox, Hetzner, OpenRouter, OpenAI, Anthropic, Funnel.io, Looker Studio, Python, Shopify, Liquid, Customer Events, Notion) distribuite tra stack, intenti `ai`, `analytics`, `stack`, il nuovo intento `shopify`, `llms.txt` e JSON-LD.
+  - "E molti altri" sui clienti; nuovi eventi `file_view`, `menu_open`, `release_notes_open`.
+  - README e handover aggiornati.

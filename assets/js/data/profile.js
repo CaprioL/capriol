@@ -79,10 +79,17 @@ export const profile = {
     { group: 'Design & Comunicazione', items: ['Brand identity', 'Graphic design', 'UX / UI', 'Copywriting', 'Content strategy'] },
     { group: 'SEO', items: ['SEO tecnica', 'SEO on-page', 'Google Search Console', 'Dati strutturati', 'AI search visibility'] },
     { group: 'Digital Analytics', items: ['Google Analytics 4', 'Google Tag Manager', 'DataLayer design', 'Tracking plan', 'Consent Mode'] },
-    { group: 'Data & Programmazione', items: ['SQL', 'BigQuery', 'JavaScript', 'HTML & CSS', 'Dashboarding'] },
-    { group: 'AI & Agentic AI', items: ['LLM', 'Prompt engineering', 'Agentic workflows', 'MCP', 'Automazioni'] },
+    { group: 'Data & BI', items: ['BigQuery', 'SQL', 'Funnel.io (ETL)', 'Looker Studio'] },
+    { group: 'Programmazione', items: ['Python', 'JavaScript', 'HTML & CSS'] },
+    { group: 'E-commerce', items: ['Shopify', 'Liquid', 'Shopify Customer Events'] },
+    { group: 'AI & Agentic AI', items: ['OpenAI', 'Anthropic', 'OpenRouter', 'n8n', 'MCP', 'Agentic workflows', 'Prompt engineering'] },
+    { group: 'Infrastruttura & Tool', items: ['Proxmox', 'Hetzner', 'Notion'] },
     { group: 'Advertising', items: ['Google Ads', 'Meta Ads', 'Performance measurement'] },
   ],
+
+  /** Nota che chiude ogni elenco clienti: un po' di mistero è voluto. */
+  clientsNote: 'E molti altri.',
+  clientsTeaser: 'Alcuni nomi preferiscono restare dietro le quinte.',
 
   /** `url` facoltativo: se presente, il logo diventa un link esterno tracciato. */
   clients: [

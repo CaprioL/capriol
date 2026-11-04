@@ -10,7 +10,9 @@ import './modules/datalayer.js';
 import { analytics } from './modules/analytics.js';
 import { askConsentIfNeeded, openConsent } from './modules/consent.js';
 import { startMetrics } from './modules/metrics.js';
-import { initChrome } from './modules/chrome.js';
+import { initChrome, loadingBar, setAddress } from './modules/chrome.js';
+import { initDocViewer, openDoc, closeDoc, isDocOpen } from './modules/docview.js';
+import { initHelpMenu } from './modules/macmenu.js';
 import * as chat from './modules/chat.js';
 import * as extensions from './modules/extensions/index.js';
 import { createDemo } from './modules/cursor-demo.js';
@@ -36,6 +38,7 @@ analytics.profileLoaded({
   skills: Object.fromEntries(profile.skills.map((g) => [g.group, g.items])),
   values: profile.values.map((v) => v.name),
   clients: profile.clients.map((c) => c.name),
+  clients_note: profile.clientsNote,
   process: profile.process.map((s) => s.name),
   contact: { email: profile.contact.email, phone: profile.contact.phone, linkedin: profile.contact.linkedin || null },
   open_to_work: true,
@@ -44,13 +47,26 @@ analytics.profileLoaded({
 /* ---------- Moduli ---------- */
 const byId = Object.fromEntries(intents.map((i) => [i.id, i]));
 
+const showDoc = (path, trigger) => { extensions.close(); openDoc(path, { source: 'menu', trigger }); };
+const replayIntro = () => { closeDoc(); demo.run(); };
+
 const ui = initChrome({
   displayUrl: config.displayUrl,
   modelName: config.modelName,
-  onNewChat: () => { extensions.close(); chat.reset(); },
-  onReplayIntro: () => demo.run(),
+  release: config.release,
+  onBack: () => (isDocOpen() ? closeDoc() : (extensions.close(), chat.reset())),
+  onNewChat: () => { closeDoc(); extensions.close(); chat.reset(); },
+  onReplayIntro: replayIntro,
   onConsent: openConsent,
+  onOpenDoc: showDoc,
 });
+
+initDocViewer({
+  onNavigate: (path) => { setAddress(path); loadingBar(); },
+  onClose: () => { setAddress(); loadingBar(); },
+});
+
+initHelpMenu({ onOpenDoc: showDoc, onReplayIntro: replayIntro, onConsent: openConsent });
 
 extensions.initExtensions({
   onAsk: (id) => chat.ask(byId[id].prompt, { source: 'extension', intentId: id }),
@@ -67,6 +83,14 @@ chat.initChat({
 });
 
 const demo = createDemo({ prompt: config.demo.prompt });
+
+/* ---------- Easter egg per chi apre la console ---------- */
+console.log(
+  `%ccapriol.%c ${config.release.version}`,
+  'font: 700 22px Montserrat, sans-serif; color: #DEC79B',
+  'font: 600 12px ui-monospace, monospace; color: #87868d',
+);
+console.log('Leaps beyond known. Se sei arrivato fin qui, parliamo la stessa lingua: giacomo.caprioli@gmail.com');
 
 /* ---------- Intro e consenso ---------- */
 // La richiesta di consenso aspetta che nessuna estensione sia aperta, per non coprirla.
