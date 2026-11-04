@@ -1,0 +1,329 @@
+# Handover: capriol. (sito portfolio di Giacomo Caprioli)
+
+> **Per chi riprende il lavoro (persona o AI):** leggi questo file per intero prima di modificare qualsiasi cosa. Contiene il concept, l'architettura, le convenzioni e le decisioni già prese, con le loro motivazioni. Se una richiesta nuova contraddice una decisione qui registrata, segnalalo prima di procedere. A fine lavoro aggiorna questo file: sezioni toccate, [registro delle decisioni](#11-registro-delle-decisioni) e [cronologia](#14-cronologia).
+
+Ultimo aggiornamento: novembre 2026.
+
+---
+
+## 1. In una frase
+
+Un sito statico su GitHub Pages: un **finto browser Safari su desktop macOS** che naviga su un'**interfaccia da LLM** addestrata su Giacomo. Le **estensioni del browser** (DataLayer, SEO, Tech Stack, Contatti) mostrano le sue competenze lavorando davvero sulla pagina stessa. Il repository è anche il **README del suo profilo GitHub** e funziona come materiale di recruiting.
+
+## 2. Persona e contenuti
+
+| Campo | Valore |
+|---|---|
+| Nome | Giacomo Caprioli |
+| Brand | **capriol.** (con il punto), claim *Leaps beyond known* |
+| Ruolo | Consulente di Digital Marketing, oltre 10 anni di esperienza |
+| Competenze | Strategia, SEO, Digital Analytics (GA4, GTM, dataLayer, BigQuery, SQL), AI e Agentic AI (LLM, MCP), Advertising, Design e comunicazione, programmazione web |
+| Email | giacomo.caprioli@gmail.com |
+| Telefono | (+39) 347 0348852 (formato scelto da Giacomo; `href` = `tel:+393470348852`) |
+| LinkedIn | https://www.linkedin.com/in/giacomo-caprioli/ |
+| GitHub | utente `CaprioL`, repository `capriol` |
+| Motto | "Nessuna sfida è troppo grande da non poter essere affrontata." |
+| Chiusura | "E ora fai la tua mossa ;)" |
+
+- **Servizi** (dal deck "Proposta progetto"):
+  - Advisory → Consulting
+  - Communications & Content → Comunicazione
+  - Web Optimization → SEO
+  - MarTech & Data → Digital Intelligence & Analytics
+  - Digital Marketing → Online Advertising
+- **Metodo** (sequenza reale, per questo numerato): Conosciamoci → Analisi account → Progetto di digital marketing.
+- **Valori:** Relazione, Trasparenza, Proattività, Approcci su misura.
+- **Clienti:**
+
+  | Cliente | Sito |
+  |---|---|
+  | TEDxVerona | |
+  | Croce Rossa Italiana | |
+  | Fondazione Architetti Mantova (FAM) | fondazionearchitettimantova.it |
+  | The Vice | the-vice.it |
+  | Rampi | |
+  | MIDJ | |
+  | Radio Iusve | |
+  | Portobello Vintage & Riuso | |
+  | NimbleBit | |
+  | LifeBites | |
+
+- **Fonti:** due deck di Giacomo ("[ProjectName] Project Proposal" in PPTX e "Fondazione Architetti Mantova – Project Proposal" in SVG). Loghi, foto, icone di servizi e valori sono stati estratti da lì.
+
+**Contenuti da far verificare a Giacomo** (scritti o dedotti dall'AI, non confermati):
+- Le frasi brevi sotto ogni valore e ogni servizio.
+- Parte dello stack in `profile.js`, dedotta dai suoi strumenti: GA4, GTM, BigQuery, Consent Mode, Dashboarding, Google/Meta Ads.
+- Python **non** è dichiarato di proposito: non è mai stato confermato.
+
+## 3. Identità visiva
+
+| Token | Valore | Uso |
+|---|---|---|
+| `--ink` | `#252528` | Colore brand: sfondo della pagina (dal deck) |
+| `--gold` | `#DEC79B` | Accento brand: link, badge, CTA, focus |
+| `--ink-2` / `--ink-3` / `--ink-4` | `#1e1e21` / `#2d2d31` / `#37373c` | Sidebar / card e toolbar / hover e bolle utente |
+| `--desk` | `#18181a` | Sfondo del desktop macOS |
+| Stati | `#8ccb9a` / `#e8b45f` / `#e8806f` | Ok / da rivedere / problema (SEO Inspector) |
+
+- **Font:** tre ruoli, ognuno motivato.
+  - **Montserrat** è la voce del brand (contenuti).
+  - Il **font di sistema** è usato per la cornice del browser, così sembra un vero Safari.
+  - **JetBrains Mono** compare solo dove il contenuto è codice o dati.
+  - Montserrat e JetBrains Mono sono self-hosted in `assets/fonts/` (subset latino, woff2 variabili).
+- **Tema:** solo scuro. È l'identità del brand: niente modalità chiara.
+- **Tono del copy:**
+  - Italiano, seconda persona verso il visitatore, terza persona quando la chat parla di Giacomo.
+  - Sentence case.
+  - Apostrofi tipografici (’).
+  - Niente maiuscolo per le etichette, salvo il logotipo "LEAPS BEYOND KNOWN", che fa parte del marchio.
+  - Ironia leggera da LLM: "capriol. potrebbe essere un po’ di parte…".
+- **Nome del modello:** solo **"capriol."**. Il suffisso "10+" è stato rimosso su richiesta: non reintrodurlo.
+
+## 4. Hosting e URL
+
+- Repository **`CaprioL/capriol`**. Il nome coincide con l'utente, quindi il `README.md` compare sul **profilo GitHub**. Per questo il README è scritto per il recruiting e non contiene istruzioni tecniche: quelle stanno qui.
+- **GitHub Pages:** project site da *Settings → Pages → Deploy from a branch → `main` / `(root)`*. URL pubblico: **https://capriol.github.io/capriol/**.
+- **Conseguenze del sottopercorso `/capriol/`:**
+  - `index.html` usa solo percorsi relativi, quindi funziona ovunque.
+  - `404.html` usa percorsi assoluti `/capriol/…`, perché viene servito su URL arbitrari.
+  - Canonical, `og:url`, `og:image`, JSON-LD, `sitemap.xml`, `robots.txt` e `llms.txt` contengono `https://capriol.github.io/capriol/`.
+  - ⚠️ `robots.txt` e `llms.txt` vengono letti dai crawler **solo alla radice del dominio**. Su un sottopercorso sono "decorativi": il `robots.txt` con l'ASCII art resta un easter egg per chi lo apre. Per renderli efficaci servono un **dominio personalizzato** (file `CNAME` + DNS) oppure un repository `CaprioL.github.io`. Intanto la sitemap va inviata da Google Search Console.
+- **Se si passa a un dominio personalizzato,** sostituisci `https://capriol.github.io/capriol/` ovunque e riporta i percorsi di `404.html` a `/assets/…`. In `404.html` va tolto anche il `.replace(/^\/capriol/, '')` nello script.
+
+## 5. Struttura dei file
+
+```
+index.html            Unica pagina. Contiene: GTM + Consent Mode (in testa), meta SEO/OG,
+                      JSON-LD, markup statico della cornice e del benvenuto, <noscript>.
+404.html              Errore in stile Safari (percorsi /capriol/…).
+robots.txt            ASCII art "capriol" in testa + regole (crawler AI consentiti).
+sitemap.xml, llms.txt, site.webmanifest, .nojekyll, .editorconfig, .gitignore, LICENSE
+README.md             Profilo GitHub / recruiting (NON istruzioni tecniche).
+docs/                 Screenshot del README + questo handover.
+
+assets/css/           Caricati in quest'ordine da index.html:
+  tokens.css          Variabili e @font-face
+  base.css            Reset, pulsanti, chip, toast, accessibilità, reduced motion
+  desktop.css         Sfondo macOS, barra dei menu
+  browser.css         Finestra Safari, toolbar, estensioni, cursore dell'intro
+  chat.css            Interfaccia LLM (sidebar, thread, composer, model menu)
+  blocks.css          Card nelle risposte (profilo, servizi 3+2, steps, clienti…)
+  extensions.css      Popover estensioni, inspector, SEO, stack, consenso
+
+assets/js/
+  main.js             Entry point: eventi iniziali, init moduli, intro, consenso
+  config.js           URL mostrato, nome modello, parametri GA4, intro, velocità streaming
+  data/profile.js     ✏️ UNICA fonte dei contenuti su Giacomo
+  data/intents.js     ✏️ Intenti della chat (keyword, prompt, tool, blocchi, follow-up)
+  modules/
+    analytics.js      Tassonomia eventi: track() custom + gemello GA4, liste item
+    datalayer.js      Intercetta window.dataLayer.push e notifica i sottoscrittori
+    consent.js        Richiesta di consenso stile Safari + gtag('consent','update')
+    chat.js           Matching intenti, streaming, tool call, azioni messaggio
+    blocks.js         Renderer dei blocchi ricchi + card contatti
+    chrome.js         Orologio, zoom finestra, sidebar, share, model menu, pulsanti
+    cursor-demo.js    Intro animata col cursore
+    metrics.js        LCP/CLS/FCP/TTFB via PerformanceObserver
+    icons.js          Set di icone SVG inline
+    dom.js            Helper (h(), sleep, normalize, toast, copyText…)
+    extensions/
+      index.js        Controller del popover (apertura, posizione, focus, Esc, badge)
+      datalayer.js    DataLayer Inspector (badge GA4/Custom/GTM, filtro, link docs)
+      seo.js          SEO Inspector (analisi reale del DOM + Web Vitals)
+      stack.js        Tech Stack (da profile.skills + tecnologie della pagina)
+      contact.js      "Fai la tua mossa" (contatti)
+      manager.js      Menu "Estensioni" (icona puzzle)
+      json-tree.js    Albero JSON con <details>
+
+assets/img/brand/     monogram.png, logo-capriol.png, giacomo-caprioli.(webp|jpg)
+assets/img/clients/   Loghi in WebP, altezza ~120 px, grigio chiaro su trasparente
+assets/img/icons/     Icone di servizi e valori dal deck (PNG bianche, 128 px)
+assets/img/og-image.png  1200×630
+assets/favicon/       ico, 32, 180 (apple), 192, 512
+assets/fonts/         woff2 subset + README licenze
+```
+
+**Nessun build step.** I file sono serviti così come sono.
+
+**Nota sulle icone.** Le icone nell'HTML statico (`index.html`) sono SVG già incollati nel markup, generati una tantum da `icons.js`. Per aggiungerne una nell'HTML, copia il markup prodotto da `icon(name, size)` in `icons.js`. Nei moduli JS usa direttamente `icon()`.
+
+## 6. Come si modificano i contenuti
+
+- **Testi, clienti, servizi, valori, competenze, contatti:** `assets/js/data/profile.js`.
+  - **Nuovo cliente:** aggiungi il logo WebP in `assets/img/clients/` e una riga `{ name, logo, url? }`. Con `url` il logo diventa un link esterno tracciato (`client_click` → `select_content`).
+  - **Telefono ed email** compaiono anche in `index.html`: nel JSON-LD (`telephone`, `email`) e nel `<noscript>`. Vanno in `llms.txt` e nel README. Aggiorna tutti i punti.
+- **Domande e risposte della chat:** `assets/js/data/intents.js`.
+  - **Matching:** testo normalizzato (minuscolo, senza accenti). Il punteggio è la somma delle lunghezze delle keyword trovate. Keyword di 3 caratteri o meno = parola intera; più lunghe = prefisso di parola.
+  - **Saluti:** hanno peso dimezzato.
+  - **Nessun match:** se compaiono "giacomo", "caprioli" o "lui" risponde `about`, altrimenti con il `fallback`.
+  - **Blocchi:** `text` (supporta `**grassetto**`), `profile`, `services`, `process`, `skills`, `values`, `quote`, `clients` (`size: sm|lg`, `caption`), `list`, `contact`, `action` (apre un'estensione).
+  - **Nuovo intento:** compare in automatico nella sidebar. Se deve generare un `view_item_list`, aggiungilo a `intentLists` in `analytics.js`.
+- **Configurazione:** `assets/js/config.js` contiene `displayUrl`, `modelName`, `ga4.currency`, `ga4.leadValue`, `demo.*` e `streamDelay`.
+
+## 7. Comportamenti dell'interfaccia
+
+- **Intro:** si avvia solo con queste condizioni.
+  - `config.demo.enabled` attivo, nessun `prefers-reduced-motion` e nessun dispositivo touch.
+  - Una volta per sessione (`sessionStorage` `capriol:intro-seen`).
+  - Sequenza: il cursore scrive `config.demo.prompt` → invia → risposta `about` → clic su DataLayer → apre `profile_loaded`.
+  - Qualsiasi `pointerdown` o `keydown` reale interrompe l'intro e completa subito la risposta. "Rivedi l’intro" nella sidebar la rilancia.
+- **Consenso:**
+  - La richiesta compare dopo l'intro e **solo quando nessuna estensione è aperta**, per non coprire la dimostrazione.
+  - La scelta è salvata in `localStorage` `capriol:consent` (`granted|denied`) e si riapre da "Preferenze cookie" nella sidebar.
+  - Su desktop scende dal bordo sinistro della barra degli indirizzi, su mobile è un bottom sheet.
+- **Estensioni:**
+  - Un solo popover alla volta, che si chiude con `Esc`, clic esterno o ✕. Su schermi ≤ 720 px diventa un bottom sheet.
+  - Il badge su `{ }` conta i push nel dataLayer.
+- **Chat:**
+  - Lo streaming segue il fondo finché l'utente non scorre verso l'alto.
+  - Il pulsante di invio diventa "stop", che completa subito la risposta.
+  - Azioni sotto ogni risposta: copia, 👍/👎 (evento `chat_feedback`), rigenera.
+- **Finestra:**
+  - Il semaforo verde ingrandisce la finestra; rosso e giallo sono decorativi e non interattivi.
+  - "Indietro" = nuova chat.
+- **Responsive:**
+  - ≤ 900 px: la sidebar diventa off-canvas.
+  - ≤ 720 px: niente barra dei menu, finestra a tutto schermo, semafori e navigazione nascosti.
+
+## 8. Analytics
+
+### Installazione
+- **GTM:** container **`GTM-T5VM84TV`**, in `<head>` di `index.html`, prima di ogni altro script, più `<noscript>` iframe dopo `<body>`. Lo snippet fornito da Giacomo (`gtag('js', new Date())`) è incluso così com'è.
+  - È stato aggiunto il push standard `{ 'gtm.start', event: 'gtm.js' }`, necessario perché i trigger "All Pages / Container Loaded" funzionino come con lo snippet ufficiale.
+- **Consent Mode v2 (default, prima di GTM):**
+  - `ad_storage`, `ad_user_data`, `ad_personalization` sono **sempre `denied`**: il sito non fa pubblicità.
+  - `analytics_storage` vale `granted` solo se il visitatore ha già accettato in una visita precedente, altrimenti `denied`.
+  - All'accettazione: `gtag('consent','update',{analytics_storage})` + evento `consent_update`.
+
+### Tassonomia
+Tutto passa da `analytics.js`. La regola: **evento custom** (descrive l'interfaccia) + **gemello GA4** inviato subito dopo, quando esiste un evento automatico o consigliato. Il custom contiene `ga4_event` come rimando. Prima di ogni push con `ecommerce` c'è `{ ecommerce: null }`.
+
+| Custom | GA4 | Parametri GA4 | Note |
+|---|---|---|---|
+| — | `page_view` | `page_title`, `page_location`, `page_path`, `page_referrer`*, `language`, `screen_resolution`, `content_group: Portfolio` | *solo se presente |
+| `profile_loaded` | — | — | Profilo completo, solo custom |
+| `chat_prompt` | `search` | `search_term` | Domanda scritta (`prompt_source: typed`) |
+| `chat_prompt` | `select_content` | `content_type: chat_suggestion`, `content_id: <intent>` | Sidebar, suggerimenti, follow-up, rigenera, estensione, intro |
+| `chat_response` | `view_item_list` | `item_list_id`, `item_list_name`, `items[]` | Per gli intenti `services`, `about`/`clients` (clienti), `stack` (competenze) |
+| `chat_feedback` | — | — | `feedback: positive/negative` |
+| `chat_reset` | — | — | |
+| `extension_open` | `select_content` | `content_type: browser_extension`, `content_id` | |
+| `client_click` | `select_content` | `content_type: client`, `content_id` | Custom con `link_url`, `link_domain`, `outbound` |
+| `contact_click` | `generate_lead` | `lead_source`, `currency`, `value` | `lead_source`: email, email_cta, phone, linkedin, copy_email |
+| `share_click` | `share` | `method`, `content_type: page`, `item_id` | |
+| `intro_start` / `intro_complete` | `tutorial_begin` / `tutorial_complete` | — | |
+| `intro_skipped`, `window_zoom`, `model_info_open`, `consent_update` | — | — | Solo custom |
+
+**Item:** campi `item_id`, `item_name`, `item_brand: capriol.`, `item_category` (Servizio / Cliente / Competenza), `item_category2` (area o gruppo), `item_list_id`, `item_list_name`, `index`.
+
+### Configurazione GTM consigliata (da fare nel container, non nel codice)
+1. **Google tag** (ID GA4) su *Initialization – All Pages*. Raccoglie il `page_view` automatico.
+2. **Tag "GA4 Event":**
+   - Nome evento `{{Event}}`.
+   - Trigger *Custom Event* con regex `^(search|select_content|view_item_list|generate_lead|share|tutorial_begin|tutorial_complete)$`. Escludi `page_view` per evitare duplicati con il Google tag.
+   - Attiva *Send Ecommerce data → Data Layer* per `view_item_list`.
+   - Parametri mappati con variabili *Data Layer* (`search_term`, `content_type`, `content_id`, `lead_source`, `method`, `item_id`, `currency`, `value`).
+3. **`generate_lead`:** segnalo come **evento chiave** in GA4.
+4. **Eventi custom:** se servono in GA4, uno o più tag dedicati. Di norma bastano per il debug e per la dimostrazione nell'Inspector.
+
+### DataLayer Inspector
+- Mostra tutto `window.dataLayer`, compresi i push di GTM e gtag, con badge **GA4** / **Custom** / **GTM**.
+- Ha un filtro segmentato e, per ogni evento GA4 o custom con gemello, un link alla **documentazione Google**. Gli URL sono in `GA4_EVENTS` in `analytics.js`.
+
+## 9. SEO e AI visibility
+
+- **Title:** "Giacomo Caprioli | Consulente Digital Marketing, SEO, Data e AI" (63 caratteri).
+- **Description:** 152 caratteri, da tenere sotto 160. Il SEO Inspector la segnala se sfora.
+- **H1:** unico, "Giacomo Caprioli", nel benvenuto statico. Quando parte la chat il benvenuto viene nascosto con `hidden`, non rimosso, così l'H1 resta nel DOM.
+- **JSON-LD:** `ProfilePage` → `mainEntity` `Person`, con `knowsAbout`, `makesOffer` (i 5 servizi), `sameAs` (LinkedIn), `brand`.
+- **Open Graph:** tipo `profile`, immagine 1200×630.
+- **Crawler AI:** `robots.txt` consente GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot e Google-Extended. Vedi la nota del §4 sui sottopercorsi.
+- **`<noscript>`:** contiene il riassunto completo per chi non esegue JavaScript.
+
+## 10. Standard di qualità (da mantenere)
+
+- **Accessibilità:**
+  - Tutto è usabile da tastiera, con focus visibile in oro e skip link.
+  - Le estensioni hanno `aria-expanded`; i popover sono `role="dialog"`.
+  - Il thread è `role="log"` con `aria-busy` durante lo streaming.
+  - Icone decorative con `aria-hidden`; testo alternativo su ogni immagine con contenuto.
+- **Movimento:**
+  - Con `prefers-reduced-motion`: niente intro, risposte istantanee, animazioni ridotte.
+  - Un solo momento orchestrato, l'intro; le altre animazioni rispondono solo ad azioni dell'utente.
+- **Performance:**
+  - Nessuna dipendenza, nessuna richiesta a terzi tranne GTM. Immagini in WebP, font subset.
+  - Peso totale circa 600 KB, screenshot di `docs/` esclusi.
+- **Codice:**
+  - Vanilla JS con ES modules e selettori CSS a una classe. Commenti in italiano.
+  - Niente `localStorage` per i contenuti, solo per il consenso. `sessionStorage` solo per l'intro.
+
+## 11. Registro delle decisioni
+
+| # | Decisione | Motivo |
+|---|---|---|
+| 1 | Nessun framework né build step | GitHub Pages senza CI; codice leggibile in una repo pubblica che fa da portfolio |
+| 2 | Chat deterministica (intenti + keyword), senza API LLM | Hosting statico, zero costi e chiavi, risposte controllate sul brand |
+| 3 | Contenuti centralizzati in `profile.js` | Una sola fonte per chat, estensioni, dataLayer |
+| 4 | Le estensioni lavorano sulla pagina reale (dataLayer vero, analisi SEO vera, Web Vitals veri) | Dimostrare le competenze invece di descriverle |
+| 5 | Font self-hosted, niente Google Fonts | GDPR (trasferimento IP) e performance |
+| 6 | Tre famiglie tipografiche con ruoli distinti | Cornice browser credibile, voce brand, dati leggibili |
+| 7 | Solo tema scuro | Identità del brand dal deck |
+| 8 | Welcome allineato a sinistra | Richiama le slide del deck (titoli a sinistra) |
+| 9 | Unica sequenza numerata = metodo in 3 fasi | La numerazione si usa solo per sequenze reali |
+| 10 | Nome modello "capriol." senza "10+" | Richiesta esplicita di Giacomo |
+| 11 | Ogni evento custom + gemello GA4 con parametri standard e `ga4_event` di rimando | Richiesta di Giacomo; GTM semplice (un tag, una regex); leggibile per chi fa analytics |
+| 12 | `{ ecommerce: null }` prima di ogni `view_item_list` | Best practice Google per evitare il merge di oggetti ecommerce |
+| 13 | Prompt in chat = `search`; suggerimento cliccato = `select_content` | Distingue l'intento libero dalla navigazione guidata |
+| 14 | `generate_lead` con `currency` e `value` da config (`value` 0) | Parametri standard completi; il valore economico lo decide Giacomo |
+| 15 | Snippet GTM fornito da Giacomo incluso tal quale, più il push `gtm.start` | Senza `gtm.js` i trigger "All Pages / Container Loaded" non scattano come previsto |
+| 16 | Consent Mode v2 con default `denied` e richiesta in stile Safari | Obbligo GDPR/Garante per GA4 in Italia; coerente col concept del browser |
+| 17 | Richiesta di consenso dopo l'intro e con estensioni chiuse | Non coprire la dimostrazione del DataLayer |
+| 18 | Repo `capriol` (= utente) e Pages su `/capriol/` | Scelta di Giacomo: il README diventa il profilo GitHub |
+| 19 | README orientato al recruiting, istruzioni tecniche solo qui | Richiesta di Giacomo |
+| 20 | `robots.txt` con ASCII art "capriol" (font figlet *big*) | Richiesta di Giacomo; easter egg per chi lavora nel settore |
+| 21 | Il logo cliente diventa un link solo se c'è `url` | Si linkano solo i siti forniti da Giacomo (FAM, The Vice) |
+| 22 | Griglia servizi 3+2 con container query | Evita la cella vuota con 5 elementi |
+
+## 12. Come testare in locale
+
+```bash
+# Emula il sottopercorso di GitHub Pages
+mkdir -p /tmp/srv && ln -s "$(pwd)" /tmp/srv/capriol
+cd /tmp/srv && python3 -m http.server 8000
+# apri http://localhost:8000/capriol/ (e /capriol/404.html)
+```
+
+Checklist dopo ogni modifica:
+- [ ] Console senza errori (in locale `gtm.js` può fallire se la rete lo blocca: è previsto).
+- [ ] Intro completa: risposta `about` → DataLayer aperto su `profile_loaded` → alla chiusura compare il consenso.
+- [ ] Sequenza nel dataLayer: `chat_prompt` → `select_content`/`search`; `chat_response` → `ecommerce: null` → `view_item_list`.
+- [ ] Inspector: filtri GA4/Custom/GTM e link alla documentazione funzionanti.
+- [ ] SEO Inspector: title tra 30 e 65 caratteri, description tra 70 e 160, un solo H1, JSON-LD rilevato.
+- [ ] Mobile a 390 px: sidebar off-canvas, estensioni e consenso come bottom sheet, composer visibile.
+- [ ] Con `prefers-reduced-motion` niente intro e risposte istantanee.
+- [ ] Il thread scorre dentro la finestra: il composer non deve mai uscire dallo schermo. È già successo: la griglia `.app` richiede `grid-template-rows: minmax(0, 1fr)` e `min-height: 0` su `.chat`.
+
+Gli screenshot in `docs/` sono stati fatti con Playwright a 1440×900. Rigenerali se l'interfaccia cambia in modo visibile.
+
+## 13. Limiti noti e possibili sviluppi
+
+- `robots.txt` e `llms.txt` non sono efficaci finché il sito vive su `/capriol/` (vedi §4).
+- Il container GTM va configurato secondo il §8: il codice si limita a fornire un dataLayer pulito.
+- Il testo della richiesta di consenso è minimale. Se servono, aggiungi un link a una privacy policy e i tempi di conservazione.
+- `leadValue` è 0: valorizzalo se Giacomo vuole attribuire un valore ai contatti.
+- **Idee non ancora realizzate:**
+  - Versione inglese (toggle lingua).
+  - Case study per cliente come nuovi intenti.
+  - Pagina privacy.
+  - Dominio personalizzato.
+  - Un intento "Disponibilità" con le tipologie di collaborazione.
+
+## 14. Cronologia
+
+- **v1:** concept, cornice macOS/Safari, chat LLM con 9 intenti, 4 estensioni + gestore, intro col cursore, SEO tecnica, asset dal deck, README tecnico.
+- **v2:**
+  - Tassonomia GA4 completa con gemelli e link alla documentazione; filtro e badge nell'Inspector.
+  - GTM `GTM-T5VM84TV` con Consent Mode v2 e richiesta di consenso.
+  - Nome modello "capriol." senza "10+"; telefono reale.
+  - Nuovi clienti: FAM, The Vice (con link), Portobello Vintage & Riuso. Radio Iusve nominato.
+  - URL su `/capriol/`; ASCII art in `robots.txt`; README riscritto per il recruiting; questo handover.

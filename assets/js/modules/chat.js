@@ -5,7 +5,7 @@
  */
 import { h, sleep, normalize, parseBold, copyText, toast, reducedMotion } from './dom.js';
 import { icon } from './icons.js';
-import { push } from './datalayer.js';
+import { analytics } from './analytics.js';
 import { renderBlock } from './blocks.js';
 import { intents, greeting, fallback } from '../data/intents.js';
 import { profile } from '../data/profile.js';
@@ -118,7 +118,7 @@ function messageActions(body, intent, prompt) {
     btn.parentElement.querySelectorAll('[data-feedback]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
     btn.setAttribute('aria-pressed', String(!pressed));
     if (!pressed) {
-      push({ event: 'chat_feedback', intent: intent.id, feedback: value });
+      analytics.chatFeedback({ intent: intent.id, feedback: value });
       toast('Grazie, feedback registrato nel dataLayer');
     }
   };
@@ -173,7 +173,7 @@ export async function ask(text, { source = 'typed', intentId } = {}) {
   stick(true);
 
   const intent = intentId ? byId[intentId] : matchIntent(prompt);
-  push({ event: 'chat_prompt', prompt_source: source, prompt_text: prompt.slice(0, 100), intent: intent.id });
+  analytics.chatPrompt({ source, text: prompt.slice(0, 100), intent: intent.id });
   markActive(intent.id);
 
   const body = h('div', { class: 'msg__body' });
@@ -213,8 +213,7 @@ export async function ask(text, { source = 'typed', intentId } = {}) {
   msg.setAttribute('aria-busy', 'false');
   stick();
 
-  push({
-    event: 'chat_response',
+  analytics.chatResponse({
     intent: intent.id,
     tool: intent.tool?.name ?? null,
     blocks: intent.blocks.map((b) => b.type),
@@ -240,7 +239,7 @@ export function reset() {
   welcome.hidden = false;
   els.thread.scrollTop = 0;
   markActive(null);
-  push({ event: 'chat_reset' });
+  analytics.chatReset();
   els.input.focus();
 }
 

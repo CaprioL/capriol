@@ -3,7 +3,7 @@
  * sidebar della chat, selettore del modello e condivisione.
  */
 import { $, copyText, toast } from './dom.js';
-import { push } from './datalayer.js';
+import { analytics } from './analytics.js';
 
 function startClock() {
   const el = $('#menubar-clock');
@@ -21,7 +21,7 @@ function loadingBar() {
   setTimeout(() => bar.classList.add('is-done'), 900);
 }
 
-export function initChrome({ displayUrl, modelName, onNewChat, onReplayIntro }) {
+export function initChrome({ displayUrl, modelName, onNewChat, onReplayIntro, onConsent }) {
   startClock();
   loadingBar();
 
@@ -35,7 +35,7 @@ export function initChrome({ displayUrl, modelName, onNewChat, onReplayIntro }) 
   $('#btn-zoom')?.addEventListener('click', (e) => {
     const zoomed = browser.classList.toggle('is-zoomed');
     e.currentTarget.setAttribute('aria-pressed', String(zoomed));
-    push({ event: 'window_zoom', zoomed });
+    analytics.windowZoom(zoomed);
   });
 
   // Sidebar della chat.
@@ -57,11 +57,12 @@ export function initChrome({ displayUrl, modelName, onNewChat, onReplayIntro }) 
   $('#btn-new-chat')?.addEventListener('click', () => { closeOnMobile(); onNewChat(); });
   $('#btn-reload')?.addEventListener('click', () => location.reload());
   $('#btn-replay')?.addEventListener('click', () => { closeOnMobile(); onReplayIntro(); });
+  $('#btn-consent')?.addEventListener('click', () => { closeOnMobile(); onConsent(); });
 
   // Condividi.
   const share = async () => {
     const data = { title: document.title, url: location.href };
-    push({ event: 'share', method: navigator.share ? 'native' : 'copy_link' });
+    analytics.share(navigator.share ? 'native' : 'copy_link');
     if (navigator.share) {
       try { await navigator.share(data); } catch { /* annullato */ }
     } else if (await copyText(location.href)) {
@@ -73,7 +74,7 @@ export function initChrome({ displayUrl, modelName, onNewChat, onReplayIntro }) 
 
   // Selettore del modello.
   const model = $('#model-menu');
-  model?.addEventListener('toggle', () => { if (model.open) push({ event: 'model_info_open' }); });
+  model?.addEventListener('toggle', () => { if (model.open) analytics.modelInfoOpen(); });
   document.addEventListener('pointerdown', (e) => {
     if (model?.open && !model.contains(e.target)) model.open = false;
   });

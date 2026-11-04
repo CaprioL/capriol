@@ -12,6 +12,9 @@
 ## Competenze trasversali
 Design e grafica, UX/UI, programmazione web (HTML, CSS, JavaScript), SQL, AI e agentic AI (LLM, MCP, automazioni).
 
+## Clienti
+TEDxVerona, Croce Rossa Italiana, Fondazione Architetti Mantova, The Vice, Rampi, MIDJ, Radio Iusve, Portobello Vintage & Riuso, NimbleBit, LifeBites.
+
 ## Metodo
 1. Conosciamoci
 2. Analisi account
@@ -23,4 +26,5 @@ Relazione, trasparenza, proattività, approcci su misura.
 ## Contatti
 - Email: giacomo.caprioli@gmail.com
 - LinkedIn: https://www.linkedin.com/in/giacomo-caprioli/
-- Sito: https://capriol.github.io/
+- Telefono: (+39) 347 0348852
+- Sito: https://capriol.github.io/capriol/

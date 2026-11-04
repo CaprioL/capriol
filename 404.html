@@ -6,11 +6,11 @@
   <title>Pagina non trovata | capriol.</title>
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#252528">
-  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="48x48">
-  <link rel="stylesheet" href="/assets/css/tokens.css">
-  <link rel="stylesheet" href="/assets/css/base.css">
-  <link rel="stylesheet" href="/assets/css/desktop.css">
-  <link rel="stylesheet" href="/assets/css/browser.css">
+  <link rel="icon" href="/capriol/assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="stylesheet" href="/capriol/assets/css/tokens.css">
+  <link rel="stylesheet" href="/capriol/assets/css/base.css">
+  <link rel="stylesheet" href="/capriol/assets/css/desktop.css">
+  <link rel="stylesheet" href="/capriol/assets/css/browser.css">
   <style>
     /* Pagina d'errore in stile Safari, dentro la stessa finestra del sito */
     .error { display: grid; place-content: center; gap: 14px; height: 100%; padding: 32px; text-align: center; }
@@ -36,14 +36,14 @@
       </div>
       <div class="viewport">
         <div class="error">
-          <img src="/assets/img/brand/monogram.png" alt="" width="56" height="56">
+          <img src="/capriol/assets/img/brand/monogram.png" alt="" width="56" height="56">
           <h1>Questa pagina non esiste</h1>
           <p>L’indirizzo potrebbe essere cambiato o contenere un errore di battitura. Tutto quello che c’è da sapere su Giacomo è nella chat.</p>
-          <a class="btn btn--gold" href="/">Torna alla chat</a>
+          <a class="btn btn--gold" href="/capriol/">Torna alla chat</a>
         </div>
       </div>
     </main>
   </div>
-  <script>document.getElementById('url').textContent = 'capriol.ai' + location.pathname;</script>
+  <script>document.getElementById('url').textContent = 'capriol.ai' + location.pathname.replace(/^\/capriol/, '');</script>
 </body>
 </html>

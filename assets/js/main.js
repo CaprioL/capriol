@@ -6,7 +6,9 @@ import { config } from './config.js';
 import { profile } from './data/profile.js';
 import { intents } from './data/intents.js';
 import { $, reducedMotion, isTouch } from './modules/dom.js';
-import { push } from './modules/datalayer.js';
+import './modules/datalayer.js';
+import { analytics } from './modules/analytics.js';
+import { askConsentIfNeeded, openConsent } from './modules/consent.js';
 import { startMetrics } from './modules/metrics.js';
 import { initChrome } from './modules/chrome.js';
 import * as chat from './modules/chat.js';
@@ -16,30 +18,12 @@ import { createDemo } from './modules/cursor-demo.js';
 startMetrics();
 document.documentElement.classList.add('js');
 
-/* ---------- Google Tag Manager (opzionale) ---------- */
-if (config.gtmId) {
-  window.gtag = function gtag() { window.dataLayer.push(arguments); };
-  window.gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-  });
-  push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.gtmId)}`;
-  document.head.append(s);
-}
+/* GTM e Consent Mode v2 sono inizializzati in index.html, prima di questo modulo. */
 
 /* ---------- Eventi iniziali ---------- */
-push({
-  event: 'page_view',
-  page: { title: document.title, path: location.pathname, language: document.documentElement.lang },
-});
+analytics.pageView();
 
-push({
-  event: 'profile_loaded',
+analytics.profileLoaded({
   person: {
     name: profile.person.name,
     brand: profile.person.brand,
@@ -65,6 +49,7 @@ const ui = initChrome({
   modelName: config.modelName,
   onNewChat: () => { extensions.close(); chat.reset(); },
   onReplayIntro: () => demo.run(),
+  onConsent: openConsent,
 });
 
 extensions.initExtensions({
@@ -83,7 +68,12 @@ chat.initChat({
 
 const demo = createDemo({ prompt: config.demo.prompt });
 
-/* ---------- Intro ---------- */
+/* ---------- Intro e consenso ---------- */
+// La richiesta di consenso aspetta che nessuna estensione sia aperta, per non coprirla.
+const askConsentWhenFree = () => (extensions.isAnyOpen()
+  ? setTimeout(askConsentWhenFree, 800)
+  : askConsentIfNeeded());
+
 const SEEN_KEY = 'capriol:intro-seen';
 let seen = false;
 try { seen = sessionStorage.getItem(SEEN_KEY) === '1'; } catch { /* storage non disponibile */ }
@@ -96,5 +86,11 @@ const shouldRunDemo = config.demo.enabled
 if (shouldRunDemo) {
   try { sessionStorage.setItem(SEEN_KEY, '1'); } catch { /* ignora */ }
   // Attende font e layout stabili prima di calcolare le posizioni del cursore.
-  (document.fonts?.ready ?? Promise.resolve()).then(() => setTimeout(demo.run, 700));
+  // La richiesta di consenso arriva dopo l'intro, per non coprirla.
+  (document.fonts?.ready ?? Promise.resolve()).then(() => setTimeout(async () => {
+    await demo.run();
+    askConsentWhenFree();
+  }, 700));
+} else {
+  setTimeout(askConsentWhenFree, 1200);
 }

@@ -120,7 +120,8 @@
 .clients__caption { font-size: var(--fs-xs); font-weight: 600; color: var(--text-3); }
 .clients__list { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; }
 .clients__list img { height: 26px; width: auto; opacity: 0.75; filter: grayscale(1); transition: opacity 0.2s; }
-.clients__list img:hover { opacity: 1; }
+.clients__list a { display: block; border-radius: 4px; }
+.clients__list img:hover, .clients__list a:focus-visible img { opacity: 1; }
 .clients--lg .clients__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -131,7 +132,8 @@
   overflow: hidden;
 }
 .clients--lg .clients__list li { display: grid; place-items: center; height: 92px; padding: 18px; background: var(--ink-3); }
-.clients--lg .clients__list img { height: auto; max-height: 40px; max-width: 100%; }
+.clients--lg .clients__list img { height: auto; max-height: 44px; max-width: 100%; }
+.clients--lg .clients__list a { display: grid; place-items: center; width: 100%; height: 100%; }
 
 /* Liste nelle risposte */
 .answer-list { display: grid; gap: 8px; max-width: 64ch; }

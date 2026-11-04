@@ -4,7 +4,8 @@
  */
 import { $, $$, h } from '../dom.js';
 import { icon } from '../icons.js';
-import { push, getLog, subscribe } from '../datalayer.js';
+import { getLog, subscribe } from '../datalayer.js';
+import { analytics } from '../analytics.js';
 import datalayer from './datalayer.js';
 import seo from './seo.js';
 import stack from './stack.js';
@@ -75,16 +76,18 @@ export function open(id, { source = 'toolbar', expand, anchor } = {}) {
     },
   });
 
+  if (!expand) requestAnimationFrame(() => { body.scrollTop = 0; });
   current = { id, cleanup };
   buttonFor(id)?.setAttribute('aria-expanded', 'true');
   if (button) position(button);
   requestAnimationFrame(() => popover.classList.add('is-open'));
   if (source !== 'intro') $('.ext-popover__close', popover).focus({ preventScroll: true });
 
-  push({ event: 'extension_open', extension_id: id, extension_name: ext.title, open_source: source });
+  analytics.extensionOpen({ id, name: ext.title, source });
 }
 
 export const isOpen = (id) => current?.id === id;
+export const isAnyOpen = () => current !== null;
 
 export function initExtensions({ onAsk }) {
   askIntent = onAsk;

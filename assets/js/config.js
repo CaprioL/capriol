@@ -8,14 +8,17 @@ export const config = {
   displayUrl: 'capriol.ai/chat',
 
   /** Nome del "modello" mostrato nel selettore in alto. */
-  modelName: 'capriol. 10+',
+  modelName: 'capriol.',
 
   /**
-   * Google Tag Manager. Lascia vuoto per non caricare nulla.
-   * Se lo attivi, il sito parte con Consent Mode v2 su "denied":
-   * aggiungi una CMP prima di andare in produzione (vedi README).
+   * Google Tag Manager è installato direttamente in index.html (GTM-T5VM84TV),
+   * così parte prima di qualsiasi modulo. Qui restano solo i parametri GA4.
    */
-  gtmId: '',
+  ga4: {
+    /** Valuta e valore attribuiti a ogni generate_lead (contatto). 0 = non valorizzato. */
+    currency: 'EUR',
+    leadValue: 0,
+  },
 
   /** Intro animata con il cursore. Viene saltata con prefers-reduced-motion e su touch. */
   demo: {

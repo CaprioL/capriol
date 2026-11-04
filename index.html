@@ -3,11 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Google Tag Manager + Consent Mode v2
+       I consensi partono "denied"; la scelta del visitatore viene salvata
+       in localStorage e applicata qui alle visite successive. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+      var choice = null;
+      try { choice = localStorage.getItem('capriol:consent'); } catch (e) {}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: choice === 'granted' ? 'granted' : 'denied'
+      });
+    })();
+    gtag('js', new Date());
+    dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T5VM84TV"></script>
+  <!-- End Google Tag Manager -->
   <title>Giacomo Caprioli | Consulente Digital Marketing, SEO, Data e AI</title>
   <meta name="description" content="Consulente di digital marketing con oltre 10 anni di esperienza: strategia, SEO, digital analytics, dati e AI agentica per far rendere gli investimenti.">
   <meta name="author" content="Giacomo Caprioli">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="https://capriol.github.io/">
+  <link rel="canonical" href="https://capriol.github.io/capriol/">
 
   <meta name="theme-color" content="#252528">
   <meta name="color-scheme" content="dark">
@@ -18,8 +40,8 @@
   <meta property="og:site_name" content="capriol.">
   <meta property="og:title" content="Giacomo Caprioli | Digital marketing, SEO, data e AI">
   <meta property="og:description" content="Un browser, un LLM e un dataLayer: il portfolio interattivo di Giacomo Caprioli, consulente di digital marketing.">
-  <meta property="og:url" content="https://capriol.github.io/">
-  <meta property="og:image" content="https://capriol.github.io/assets/img/og-image.png">
+  <meta property="og:url" content="https://capriol.github.io/capriol/">
+  <meta property="og:image" content="https://capriol.github.io/capriol/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Finestra di browser con la chat di capriol. e il nome di Giacomo Caprioli">
@@ -55,23 +77,23 @@
     "@graph": [
       {
         "@type": "ProfilePage",
-        "@id": "https://capriol.github.io/#page",
-        "url": "https://capriol.github.io/",
+        "@id": "https://capriol.github.io/capriol/#page",
+        "url": "https://capriol.github.io/capriol/",
         "name": "Giacomo Caprioli | Consulente Digital Marketing, SEO, Data e AI",
         "inLanguage": "it-IT",
-        "mainEntity": { "@id": "https://capriol.github.io/#person" }
+        "mainEntity": { "@id": "https://capriol.github.io/capriol/#person" }
       },
       {
         "@type": "Person",
-        "@id": "https://capriol.github.io/#person",
+        "@id": "https://capriol.github.io/capriol/#person",
         "name": "Giacomo Caprioli",
         "jobTitle": "Consulente di Digital Marketing",
         "description": "Consulente di digital marketing con oltre dieci anni di esperienza. Aiuta i brand a incrementare le performance delle loro piattaforme e a capitalizzare sugli investimenti digitali.",
-        "image": "https://capriol.github.io/assets/img/brand/giacomo-caprioli.jpg",
+        "image": "https://capriol.github.io/capriol/assets/img/brand/giacomo-caprioli.jpg",
         "email": "mailto:giacomo.caprioli@gmail.com",
-        "telephone": "+39 347 0000000",
+        "telephone": "+39 347 0348852",
         "sameAs": ["https://www.linkedin.com/in/giacomo-caprioli/"],
-        "url": "https://capriol.github.io/",
+        "url": "https://capriol.github.io/capriol/",
         "brand": { "@type": "Brand", "name": "capriol.", "slogan": "Leaps beyond known" },
         "knowsAbout": ["Digital marketing", "Search engine optimization", "Digital analytics", "Google Analytics 4", "Google Tag Manager", "BigQuery", "SQL", "Online advertising", "Graphic design", "UX design", "Artificial intelligence", "Agentic AI"],
         "makesOffer": [
@@ -89,6 +111,8 @@
   <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T5VM84TV" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
   <a class="skip-link" href="#composer-input">Vai alla chat</a>
 
   <div class="desktop">
@@ -164,10 +188,11 @@
 
             <div class="sidebar__foot">
               <button class="sidebar__replay" id="btn-replay" type="button"><svg class="icon " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 5v14l12-7z"/></svg><span>Rivedi l’intro</span></button>
+              <button class="sidebar__replay" id="btn-consent" type="button"><svg class="icon " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Preferenze cookie</span></button>
               <div class="model-card">
                 <img src="assets/img/brand/monogram.png" alt="" width="32" height="32">
                 <div>
-                  <p class="model-card__name" data-model-name>capriol. 10+</p>
+                  <p class="model-card__name" data-model-name>capriol.</p>
                   <p class="model-card__tag">Leaps beyond known</p>
                 </div>
               </div>
@@ -178,11 +203,11 @@
           <section class="chat" aria-label="Chat con capriol.">
             <header class="chat__top">
               <details class="model" id="model-menu">
-                <summary><span data-model-name>capriol. 10+</span><svg class="icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
+                <summary><span data-model-name>capriol.</span><svg class="icon " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></summary>
                 <div class="model__menu">
                   <p class="model__row">
                     <img src="assets/img/brand/monogram.png" alt="" width="28" height="28">
-                    <span data-model-name>capriol. 10+</span><svg class="icon " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+                    <span data-model-name>capriol.</span><svg class="icon " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
                   </p>
                   <p class="model__desc">Addestrato su oltre dieci anni di digital marketing, SEO, dati e AI. Risponde solo su Giacomo, e lo fa volentieri.</p>
                   <dl class="model__specs">
@@ -257,7 +282,7 @@
         <h2>Valori</h2>
         <p>Relazione, trasparenza, proattività, approcci su misura.</p>
         <h2>Contatti</h2>
-        <p><a href="mailto:giacomo.caprioli@gmail.com">giacomo.caprioli@gmail.com</a> · <a href="tel:+393470000000">+39 347 0000000</a> · <a href="https://www.linkedin.com/in/giacomo-caprioli/">LinkedIn</a></p>
+        <p><a href="mailto:giacomo.caprioli@gmail.com">giacomo.caprioli@gmail.com</a> · <a href="tel:+393470348852">(+39) 347 0348852</a> · <a href="https://www.linkedin.com/in/giacomo-caprioli/">LinkedIn</a></p>
         <p>Questa pagina è un’esperienza interattiva: attiva JavaScript per usare la chat e le estensioni.</p>
       </div>
     </div>

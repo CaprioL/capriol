@@ -84,20 +84,23 @@ export const profile = {
     { group: 'Advertising', items: ['Google Ads', 'Meta Ads', 'Performance measurement'] },
   ],
 
+  /** `url` facoltativo: se presente, il logo diventa un link esterno tracciato. */
   clients: [
     { name: 'TEDxVerona', logo: `${IMG}/clients/tedx-verona.webp` },
     { name: 'Croce Rossa Italiana', logo: `${IMG}/clients/croce-rossa-italiana.webp` },
+    { name: 'Fondazione Architetti Mantova', logo: `${IMG}/clients/fondazione-architetti-mantova.webp`, url: 'https://fondazionearchitettimantova.it' },
+    { name: 'The Vice', logo: `${IMG}/clients/the-vice.webp`, url: 'https://the-vice.it' },
     { name: 'Rampi', logo: `${IMG}/clients/rampi.webp` },
     { name: 'MIDJ', logo: `${IMG}/clients/midj.webp` },
+    { name: 'Radio Iusve', logo: `${IMG}/clients/radio-iusve.webp` },
+    { name: 'Portobello Vintage & Riuso', logo: `${IMG}/clients/portobello-vintage-riuso.webp` },
     { name: 'NimbleBit', logo: `${IMG}/clients/nimblebit.webp` },
     { name: 'LifeBites', logo: `${IMG}/clients/lifebites.webp` },
-    { name: 'Radio Iusve', logo: `${IMG}/clients/radio-iusve.webp` },
   ],
 
   contact: {
     email: 'giacomo.caprioli@gmail.com',
-    /** Placeholder: sostituisci con il numero reale quando vuoi pubblicarlo. */
-    phone: '+39 347 0000000',
+    phone: '(+39) 347 0348852',
     /** Lascia vuoto per nascondere LinkedIn ovunque. */
     linkedin: 'https://www.linkedin.com/in/giacomo-caprioli/',
     cta: 'E ora fai la tua mossa ;)',

@@ -4,7 +4,7 @@
  */
 import { h, copyText, toast } from './dom.js';
 import { icon } from './icons.js';
-import { push } from './datalayer.js';
+import { analytics } from './analytics.js';
 
 function picture(src, fallback, alt, attrs = {}) {
   return h('picture', {},
@@ -72,9 +72,12 @@ const renderers = {
   clients({ profile }, block) {
     return h('figure', { class: `clients clients--${block.size || 'sm'}` },
       block.caption ? h('figcaption', { class: 'clients__caption' }, block.caption) : null,
-      h('ul', { class: 'clients__list' }, profile.clients.map((c) =>
-        h('li', {}, h('img', { src: c.logo, alt: c.name, title: c.name, loading: 'lazy', decoding: 'async' })),
-      )),
+      h('ul', { class: 'clients__list' }, profile.clients.map((c) => {
+        const logo = h('img', { src: c.logo, alt: c.name, title: c.name, loading: 'lazy', decoding: 'async' });
+        return h('li', {}, c.url
+          ? h('a', { href: c.url, target: '_blank', rel: 'noopener', onclick: () => analytics.clientClick(c) }, logo)
+          : logo);
+      })),
     );
   },
 
@@ -99,8 +102,8 @@ const renderers = {
 /** Card contatti: usata sia in chat sia nell'estensione "Fai la tua mossa". */
 export function contactCard(profile, { compact = false } = {}) {
   const c = profile.contact;
-  const tel = c.phone.replace(/\s+/g, '');
-  const track = (method) => () => push({ event: 'contact_click', contact_method: method });
+  const tel = c.phone.replace(/[^\d+]/g, '');
+  const track = (method) => () => analytics.contact(method);
 
   const copyBtn = h('button', {
     type: 'button',
@@ -108,7 +111,7 @@ export function contactCard(profile, { compact = false } = {}) {
     html: `${icon('copy', 16)}<span>Copia email</span>`,
     onclick: async () => {
       if (await copyText(c.email)) toast('Email copiata');
-      push({ event: 'contact_click', contact_method: 'copy_email' });
+      analytics.contact('copy_email');
     },
   });
 

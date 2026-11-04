@@ -1,9 +1,30 @@
+#
+#                         _       _
+#                        (_)     | |
+#     ___ __ _ _ __  _ __ _  ___ | |
+#    / __/ _` | '_ \| '__| |/ _ \| |
+#   | (_| (_| | |_) | |  | | (_) | |
+#    \___\__,_| .__/|_|  |_|\___/|_|
+#             | |
+#             |_|
+#
+#   Leaps beyond known.
+#   Giacomo Caprioli: digital marketing, SEO, data & AI
+#   https://capriol.github.io/capriol/
+#
+#   Se stai leggendo questo file, probabilmente parliamo la stessa lingua.
+#   E ora fai la tua mossa ;)  giacomo.caprioli@gmail.com
+#
+
 User-agent: *
 Allow: /
 
 # Crawler degli assistenti AI: accesso consentito di proposito,
 # per essere citabili nelle risposte (AI search visibility).
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ClaudeBot
@@ -15,4 +36,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://capriol.github.io/sitemap.xml
+Sitemap: https://capriol.github.io/capriol/sitemap.xml

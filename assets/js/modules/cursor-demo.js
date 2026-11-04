@@ -6,7 +6,7 @@
 import { $, sleep } from './dom.js';
 import * as chat from './chat.js';
 import * as extensions from './extensions/index.js';
-import { push } from './datalayer.js';
+import { analytics } from './analytics.js';
 
 class Aborted extends Error {}
 
@@ -60,7 +60,7 @@ export function createDemo({ prompt }) {
     aborted = true;
     chat.finishNow();
     finish();
-    push({ event: 'intro_skipped' });
+    analytics.introSkipped();
   }
 
   function finish() {
@@ -91,7 +91,7 @@ export function createDemo({ prompt }) {
 
     place(pos.x, pos.y, 0);
     cursor.classList.add('is-visible');
-    push({ event: 'intro_start' });
+    analytics.introStart();
 
     try {
       await wait(500);
@@ -120,7 +120,7 @@ export function createDemo({ prompt }) {
       await wait(1600);
 
       finish();
-      push({ event: 'intro_complete' });
+      analytics.introComplete();
     } catch (err) {
       if (!(err instanceof Aborted)) throw err;
     }
