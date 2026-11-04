@@ -1,0 +1,14 @@
+{
+  "name": "capriol. | Giacomo Caprioli",
+  "short_name": "capriol.",
+  "description": "Il portfolio interattivo di Giacomo Caprioli, consulente di digital marketing.",
+  "lang": "it",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#252528",
+  "theme_color": "#252528",
+  "icons": [
+    { "src": "assets/favicon/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/favicon/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

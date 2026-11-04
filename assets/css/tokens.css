@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Design tokens
+   Palette e tipografia derivano dal deck "Proposta progetto" di capriol.:
+   antracite #252528, oro champagne #DEC79B, bianco, Montserrat.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/montserrat-var-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/jetbrains-mono-var-latin.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Superfici: dal desktop (più scuro) ai pannelli in rilievo */
+  --desk: #18181a;
+  --ink-2: #1e1e21;   /* sidebar */
+  --ink: #252528;     /* colore brand: area della pagina */
+  --ink-3: #2d2d31;   /* card, toolbar */
+  --ink-4: #37373c;   /* hover, bolle utente */
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+
+  /* Testo */
+  --text: #f5f4f1;
+  --text-2: #b6b5ba;
+  --text-3: #87868d;
+
+  /* Oro brand */
+  --gold: #dec79b;
+  --gold-strong: #ead8b4;
+  --gold-soft: rgba(222, 199, 155, 0.12);
+  --gold-line: rgba(222, 199, 155, 0.35);
+  --on-gold: #252528;
+
+  /* Stati (estensione SEO) */
+  --good: #8ccb9a;
+  --warn: #e8b45f;
+  --bad: #e8806f;
+
+  /* Sintassi JSON */
+  --j-key: var(--gold);
+  --j-str: #b9d3a6;
+  --j-num: #a9bbef;
+  --j-bool: #e2a6c8;
+  --j-null: var(--text-3);
+
+  /* Semafori macOS */
+  --tl-close: #ff5f57;
+  --tl-min: #febc2e;
+  --tl-zoom: #28c840;
+
+  /* Tipografia
+     - brand: Montserrat, voce di capriol. (contenuti della "pagina")
+     - ui: font di sistema, per una cornice browser credibile
+     - mono: JetBrains Mono, solo dove il contenuto è codice o dati */
+  --font-brand: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-display: clamp(2.1rem, 1.4rem + 2.6vw, 3.2rem);
+
+  /* Forma: raggi diversi per livelli diversi */
+  --r-window: 12px;
+  --r-lg: 18px;
+  --r-md: 12px;
+  --r-sm: 8px;
+  --r-pill: 999px;
+
+  --shadow-window:
+    0 0 0 0.5px rgba(0, 0, 0, 0.7),
+    0 34px 90px -12px rgba(0, 0, 0, 0.7),
+    0 12px 28px -8px rgba(0, 0, 0, 0.45);
+  --shadow-pop:
+    0 0 0 0.5px rgba(0, 0, 0, 0.6),
+    0 22px 60px -14px rgba(0, 0, 0, 0.75);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-cursor: cubic-bezier(0.55, 0.05, 0.25, 1);
+
+  --menubar-h: 28px;
+  --toolbar-h: 52px;
+}

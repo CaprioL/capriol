@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Desktop macOS: sfondo e barra dei menu
+   ========================================================================== */
+
+.desktop {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: var(--menubar-h) 1fr;
+  background:
+    radial-gradient(1100px 700px at 12% -12%, rgba(222, 199, 155, 0.17), transparent 62%),
+    radial-gradient(900px 620px at 108% 112%, rgba(222, 199, 155, 0.09), transparent 60%),
+    linear-gradient(180deg, #1b1b1e 0%, var(--desk) 100%);
+}
+
+/* Monogramma in filigrana, come nel deck */
+.desktop::before {
+  content: '';
+  position: absolute;
+  right: 4vw; bottom: 6vh;
+  width: 34vmin; height: 34vmin;
+  background: url('../img/brand/monogram.png') center / contain no-repeat;
+  opacity: 0.05;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.menubar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--menubar-h);
+  padding: 0 14px;
+  background: rgba(24, 24, 26, 0.55);
+  backdrop-filter: saturate(160%) blur(20px);
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  user-select: none;
+}
+
+.menubar__group { display: flex; align-items: center; gap: 18px; }
+.menubar__logo { width: 16px; height: 16px; filter: grayscale(1) brightness(2.2); }
+.menubar__app { font-weight: 700; }
+.menubar__icon { display: inline-flex; opacity: 0.9; }
+.menubar__clock { font-variant-numeric: tabular-nums; text-transform: capitalize; }

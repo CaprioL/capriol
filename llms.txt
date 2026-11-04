@@ -1,0 +1,26 @@
+# Giacomo Caprioli (capriol.)
+
+> Consulente di digital marketing con oltre dieci anni di esperienza. Aiuta i brand a incrementare le performance delle loro piattaforme e a capitalizzare sugli investimenti digitali. Claim del brand: "Leaps beyond known".
+
+## Servizi
+- Advisory: consulting, strategia digitale e audit
+- Communications & Content: comunicazione, contenuti, identità visiva
+- Web Optimization: SEO tecnica e on-page, dati strutturati, visibilità nelle risposte AI
+- MarTech & Data: tracking plan, dataLayer, GA4, Google Tag Manager, BigQuery, SQL, dashboard
+- Digital Marketing: online advertising e misurazione delle performance
+
+## Competenze trasversali
+Design e grafica, UX/UI, programmazione web (HTML, CSS, JavaScript), SQL, AI e agentic AI (LLM, MCP, automazioni).
+
+## Metodo
+1. Conosciamoci
+2. Analisi account
+3. Progetto di digital marketing su misura
+
+## Valori
+Relazione, trasparenza, proattività, approcci su misura.
+
+## Contatti
+- Email: giacomo.caprioli@gmail.com
+- LinkedIn: https://www.linkedin.com/in/giacomo-caprioli/
+- Sito: https://capriol.github.io/

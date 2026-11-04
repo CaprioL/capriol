@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pagina non trovata | capriol.</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#252528">
+  <link rel="icon" href="/assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/desktop.css">
+  <link rel="stylesheet" href="/assets/css/browser.css">
+  <style>
+    /* Pagina d'errore in stile Safari, dentro la stessa finestra del sito */
+    .error { display: grid; place-content: center; gap: 14px; height: 100%; padding: 32px; text-align: center; }
+    .error img { width: 56px; height: 56px; margin: 0 auto 6px; border-radius: 50%; }
+    .error h1 { font-size: var(--fs-lg); font-weight: 700; }
+    .error p { max-width: 46ch; color: var(--text-2); }
+    .error .btn { justify-self: center; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <div class="desktop">
+    <header class="menubar" aria-hidden="true">
+      <div class="menubar__group"><span class="menubar__app">capriol.</span><span>File</span><span>Modifica</span><span>Vista</span></div>
+    </header>
+    <main class="browser">
+      <div class="toolbar">
+        <div class="traffic" aria-hidden="true">
+          <span class="traffic__btn traffic__btn--close"></span>
+          <span class="traffic__btn traffic__btn--min"></span>
+          <span class="traffic__btn traffic__btn--zoom"></span>
+        </div>
+        <div class="address"><span class="address__text" id="url">capriol.ai</span></div>
+      </div>
+      <div class="viewport">
+        <div class="error">
+          <img src="/assets/img/brand/monogram.png" alt="" width="56" height="56">
+          <h1>Questa pagina non esiste</h1>
+          <p>L’indirizzo potrebbe essere cambiato o contenere un errore di battitura. Tutto quello che c’è da sapere su Giacomo è nella chat.</p>
+          <a class="btn btn--gold" href="/">Torna alla chat</a>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>document.getElementById('url').textContent = 'capriol.ai' + location.pathname;</script>
+</body>
+</html>
